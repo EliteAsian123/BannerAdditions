@@ -7,8 +7,7 @@ BannerAdditions adds more banner patterns to Minecraft (1.16.1)! **This mod is s
 - ❌ Shields with banners.
 - ❌ Animated banner patterns.
 - ❌ Easy custom banners (probably with datapacks or something).
-
 - ❓ 1.15 versions?
 
 # How to Install
-Currently, you have to compile the mod yourself, but once I am done adding shields with banners back in, I will provide a jar. I will also adventually put it on CurseForge.
+Currently, you have to compile the mod yourself, but once I am done adding shields with banners back in, I will provide a jar. I will also eventually put it on CurseForge.
