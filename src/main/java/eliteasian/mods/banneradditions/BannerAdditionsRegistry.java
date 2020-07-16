@@ -3,6 +3,7 @@ package eliteasian.mods.banneradditions;
 import eliteasian.mods.banneradditions.banner.*;
 import eliteasian.mods.banneradditions.loom.NewLoomBlock;
 import eliteasian.mods.banneradditions.loom.NewLoomContainer;
+import eliteasian.mods.banneradditions.shield.NewShieldItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -10,10 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.LoomContainer;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
@@ -132,6 +130,8 @@ public final class BannerAdditionsRegistry {
 
         public static final Item LOOM = reg(new BlockItem(BannerAdditionsRegistry.Blocks.LOOM, (new Item.Properties()).group(ItemGroup.DECORATIONS)), "loom");
 
+        public static final Item SHIELD = reg(new NewShieldItem((new Item.Properties()).maxDamage(336).group(ItemGroup.COMBAT)), "shield");
+
         private static Item regBanner(Item item, String name) {
             item.setRegistryName(new ResourceLocation("minecraft", name));
             BANNER_ITEMS.add(item);
@@ -145,7 +145,10 @@ public final class BannerAdditionsRegistry {
         public static void registerAllItems(final RegistryEvent.Register<Item> event) {
             event.getRegistry().registerAll(BANNER_ITEMS.toArray(new Item[0]));
 
-            event.getRegistry().register(LOOM);
+            event.getRegistry().registerAll(
+                    LOOM,
+                    SHIELD
+            );
         }
     }
 }

@@ -5,15 +5,19 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
 public class BannerPatternHolder {
-    private final ResourceLocation texture;
+    private final ResourceLocation bannerTexture;
+    private final ResourceLocation shieldTexture;
+
     private final String hashname;
 
     private final String translationKey;
 
     private final Item item;
 
-    public BannerPatternHolder(ResourceLocation texture, String hashname, String translationKey) {
-        this.texture = texture;
+    public BannerPatternHolder(ResourceLocation bannerTexture, ResourceLocation shieldTexture, String hashname, String translationKey) {
+        this.bannerTexture = bannerTexture;
+        this.shieldTexture = shieldTexture;
+
         this.hashname = hashname;
 
         this.translationKey = translationKey;
@@ -21,8 +25,10 @@ public class BannerPatternHolder {
         this.item = Items.AIR;
     }
 
-    public BannerPatternHolder(ResourceLocation texture, String hashname, String translationKey, Item item) {
-        this.texture = texture;
+    public BannerPatternHolder(ResourceLocation texture, ResourceLocation shieldTexture, String hashname, String translationKey, Item item) {
+        this.bannerTexture = texture;
+        this.shieldTexture = shieldTexture;
+
         this.hashname = hashname;
 
         this.translationKey = translationKey;
@@ -37,8 +43,12 @@ public class BannerPatternHolder {
         return this.hashname;
     }
 
-    public ResourceLocation getTexture() {
-        return this.texture;
+    public ResourceLocation getBannerTexture() {
+        return this.bannerTexture;
+    }
+
+    public ResourceLocation getShieldTexture() {
+        return this.shieldTexture;
     }
 
     public String getTranslationKey() {

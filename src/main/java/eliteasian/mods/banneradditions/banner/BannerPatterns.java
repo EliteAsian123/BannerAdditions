@@ -71,11 +71,11 @@ public class BannerPatterns {
     }
 
     private static void regNoAtlas(String texture, String hash) {
-        bannerPatterns.add(new BannerPatternHolder(getBannerTexture(texture), hash, texture));
+        bannerPatterns.add(new BannerPatternHolder(getBannerTexture(texture), getShieldTexture(texture), hash, texture));
     }
 
     private static void regNoAtlas(String texture, String hash, Item item) {
-        bannerPatterns.add(new BannerPatternHolder(getBannerTexture(texture), hash, texture, item));
+        bannerPatterns.add(new BannerPatternHolder(getBannerTexture(texture), getShieldTexture(texture), hash, texture, item));
     }
 
     private static void reg(String texture, String hash) {
@@ -90,6 +90,10 @@ public class BannerPatterns {
 
     private static ResourceLocation getBannerTexture(String name) {
         return new ResourceLocation("minecraft", "entity/banner/" + name);
+    }
+
+    private static ResourceLocation getShieldTexture(String name) {
+        return new ResourceLocation("minecraft", "entity/shield/" + name);
     }
 
     public static BannerPatternHolder get(int i) {

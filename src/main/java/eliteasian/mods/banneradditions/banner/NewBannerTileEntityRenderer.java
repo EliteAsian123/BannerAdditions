@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mojang.datafixers.util.Pair;
 import java.util.List;
 
-import eliteasian.mods.banneradditions.BannerAdditions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallBannerBlock;
 import net.minecraft.client.renderer.Atlases;
@@ -17,7 +16,6 @@ import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.DyeColor;
-import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
@@ -96,9 +94,8 @@ public class NewBannerTileEntityRenderer extends TileEntityRenderer<NewBannerTil
         for(int i = 0; i < 17 && i < p_241717_7_.size(); ++i) {
             Pair<BannerPatternHolder, DyeColor> pair = p_241717_7_.get(i);
             float[] afloat = pair.getSecond().getColorComponentValues();
-            RenderMaterial rendermaterial = new RenderMaterial(p_241717_6_ ? Atlases.BANNER_ATLAS : Atlases.SHIELD_ATLAS, pair.getFirst().getTexture());
+            RenderMaterial rendermaterial = new RenderMaterial(p_241717_6_ ? Atlases.BANNER_ATLAS : Atlases.SHIELD_ATLAS, p_241717_6_ ? pair.getFirst().getBannerTexture() : pair.getFirst().getShieldTexture());
             p_241717_4_.render(p_241717_0_, rendermaterial.getBuffer(p_241717_1_, RenderType::getEntityNoOutline), p_241717_2_, p_241717_3_, afloat[0], afloat[1], afloat[2], 1.0F);
         }
-
     }
 }

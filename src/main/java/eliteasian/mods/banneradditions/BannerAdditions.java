@@ -5,10 +5,6 @@ import eliteasian.mods.banneradditions.banner.NewBannerTileEntityRenderer;
 import eliteasian.mods.banneradditions.loom.NewLoomScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.client.gui.screen.LoomScreen;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSpriteStitcher;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
@@ -81,7 +77,11 @@ public class BannerAdditions {
     public static void atlasTextures(final TextureStitchEvent.Pre event) {
         if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/banner_patterns.png"))) {
             for (int i : BannerPatterns.getAtlasNeededPatterns()) {
-                event.addSprite(BannerPatterns.get(i).getTexture());
+                event.addSprite(BannerPatterns.get(i).getBannerTexture());
+            }
+        } else if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/shield_patterns.png"))) {
+            for (int i : BannerPatterns.getAtlasNeededPatterns()) {
+                event.addSprite(BannerPatterns.get(i).getShieldTexture());
             }
         }
     }
