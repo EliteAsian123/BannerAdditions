@@ -4,6 +4,7 @@ import eliteasian.mods.banneradditions.banner.*;
 import eliteasian.mods.banneradditions.loom.NewLoomBlock;
 import eliteasian.mods.banneradditions.loom.NewLoomContainer;
 import eliteasian.mods.banneradditions.shield.NewShieldItem;
+import eliteasian.mods.banneradditions.shield.ShieldRecipe;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -12,6 +13,9 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.LoomContainer;
 import net.minecraft.item.*;
+import net.minecraft.item.crafting.ICraftingRecipe;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
@@ -149,6 +153,19 @@ public final class BannerAdditionsRegistry {
                     LOOM,
                     SHIELD
             );
+        }
+    }
+
+    public static class CraftingRecipes {
+        // Minecraft just has a weird name for this recipe type
+        public static final IRecipeSerializer<ShieldRecipe> SHIELD_RECIPE = reg(new ShieldRecipe.Serializer(), "crafting_special_shielddecoration");
+
+        private static <T extends ICraftingRecipe> IRecipeSerializer<T> reg(IRecipeSerializer<T> recipeSerializer, String name) {
+            return (IRecipeSerializer<T>) recipeSerializer.setRegistryName(new ResourceLocation("minecraft", name));
+        }
+
+        public static void registerAllRecipes(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
+            event.getRegistry().register(SHIELD_RECIPE);
         }
     }
 }

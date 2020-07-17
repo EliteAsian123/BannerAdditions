@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -71,6 +72,11 @@ public class BannerAdditions {
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event) {
         BannerAdditionsRegistry.Items.registerAllItems(event);
+    }
+
+    @SubscribeEvent
+    public static void registerCraftingRecipes(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
+        BannerAdditionsRegistry.CraftingRecipes.registerAllRecipes(event);
     }
 
     @SubscribeEvent

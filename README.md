@@ -5,10 +5,14 @@ BannerAdditions adds more banner patterns to Minecraft (1.16.1)! **This mod is s
 - ✔ Added banner patterns (currently only Checker).
 - ✔ More than 6 patterns on a banner (now 12).
 - ✔ Banner Pattern Items can have more than one pattern on them.
-- ✔ Shields with banners (no shield recipe yet).
-- ❌ Animated banner patterns.
+- ✔ Shields support.
 - ❌ Easy custom banners (probably with datapacks or something).
-- ❓ 1.15 versions?
+- ❌ Animated banner patterns.
 
-# How to Install
-Currently, you have to compile the mod yourself, but once I am done adding shields with banners back in, I will provide a jar. I will also eventually put it on CurseForge.
+# Download
+[Download jar from Github.](../raw/master/jars/BannerAdditions-1.16.1-0.2-BETA.jar)<br>
+BannerAdditions will be available on CurseForge soon. 
+
+# License
+All of **my code** is under the MIT License ([license here](../blob/master/LICENSE).<br>
+All of **Forge's** is under a different license ([license here](../blob/master/FORGE_LICENSE).
