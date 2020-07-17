@@ -2,10 +2,10 @@
 BannerAdditions adds more banner patterns to Minecraft (1.16.1)! **This mod is still in development and is not recommeneded that you use it until it is finished.**
 
 # Features (and Planned Features)
-- ✔ Added banner patterns (currently only Checker).
+- ✔ More banner patterns (currently only Checker).
 - ✔ More than 6 patterns on a banner (now 12).
 - ✔ Banner Pattern Items can have more than one pattern on them.
-- ✔ Shields support.
+- ✔ Shield support.
 - ❌ Easy custom banners (probably with datapacks or something).
 - ❌ Animated banner patterns.
 
