@@ -26,7 +26,7 @@ Along with this, some of the normal banner pattern recipes have gotten less expe
 Todo
 
 # Download
-[Download mod from Github](https://github.com/EliteAsian123/BannerAdditions/releases) (Click the down arrow beside "assets" and download the jar file)<br>
+[Download mod from Github](https://github.com/EliteAsian123/BannerAdditions/releases) (Click the down arrow beside "assets" and download the jar file on the lastest version).<br>
 BannerAdditions will be available on CurseForge soon. 
 
 # License
