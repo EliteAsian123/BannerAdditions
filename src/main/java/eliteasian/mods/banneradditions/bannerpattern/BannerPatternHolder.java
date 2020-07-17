@@ -1,4 +1,4 @@
-package eliteasian.mods.banneradditions.banner;
+package eliteasian.mods.banneradditions.bannerpattern;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -10,31 +10,31 @@ public class BannerPatternHolder {
 
     private final String hashname;
 
-    private final String translationKey;
+    private final String fullName;
 
-    private final Item item;
+    private final ResourceLocation item;
 
-    public BannerPatternHolder(ResourceLocation bannerTexture, ResourceLocation shieldTexture, String hashname, String translationKey) {
+    public BannerPatternHolder(ResourceLocation bannerTexture, ResourceLocation shieldTexture, String hashname, String fullName) {
         this.bannerTexture = bannerTexture;
         this.shieldTexture = shieldTexture;
 
         this.hashname = hashname;
 
-        this.translationKey = translationKey;
+        this.fullName = fullName;
 
-        this.item = Items.AIR;
+        this.item = Items.AIR.getRegistryName();
     }
 
-    public BannerPatternHolder(ResourceLocation texture, ResourceLocation shieldTexture, String hashname, String translationKey, Item item) {
+    public BannerPatternHolder(ResourceLocation texture, ResourceLocation shieldTexture, String hashname, String fullName, ResourceLocation item) {
         this.bannerTexture = texture;
         this.shieldTexture = shieldTexture;
 
         this.hashname = hashname;
 
-        this.translationKey = translationKey;
+        this.fullName = fullName;
 
         if (item == null)
-            this.item = Items.AIR;
+            this.item = Items.AIR.getRegistryName();
         else
             this.item = item;
     }
@@ -52,10 +52,10 @@ public class BannerPatternHolder {
     }
 
     public String getTranslationKey() {
-        return "block.minecraft.banner." + translationKey;
+        return "block.minecraft.banner." + fullName;
     }
 
-    public Item getItem() {
+    public ResourceLocation getItem() {
         return this.item;
     }
 }

@@ -1,8 +1,9 @@
 package eliteasian.mods.banneradditions.loom;
 
+import eliteasian.mods.banneradditions.BannerAdditions;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
-import eliteasian.mods.banneradditions.banner.BannerPatternHolder;
-import eliteasian.mods.banneradditions.banner.BannerPatterns;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import eliteasian.mods.banneradditions.banner.NewBannerItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -85,7 +86,18 @@ public class NewLoomContainer extends Container {
              * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
              */
             public boolean isItemValid(ItemStack stack) {
-                return stack.getItem() instanceof BannerPatternItem;
+                Item stackitem = stack.getItem();
+
+                for (int i = 0; i < BannerPatterns.getLength(); i++) {
+                    if (BannerPatterns.get(i).getItem().equals(stackitem.getRegistryName())) {
+                        return true;
+                    }
+                    BannerAdditions.LOGGER.debug(BannerPatterns.get(i).getItem());
+                }
+
+                BannerAdditions.LOGGER.debug("False for " + stackitem.getRegistryName());
+
+                return false;
             }
         });
 
@@ -184,6 +196,15 @@ public class NewLoomContainer extends Container {
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
+
+            boolean isPattern = false;
+
+            for (int i = 0; i < BannerPatterns.getLength(); i++) {
+                if (BannerPatterns.get(i).getItem().equals(itemstack1.getItem().getRegistryName())) {
+                    isPattern = true;
+                }
+            }
+
             if (index == this.output.slotNumber) {
                 if (!this.mergeItemStack(itemstack1, 4, 40, true)) {
                     return ItemStack.EMPTY;
@@ -199,7 +220,7 @@ public class NewLoomContainer extends Container {
                     if (!this.mergeItemStack(itemstack1, this.slotDye.slotNumber, this.slotDye.slotNumber + 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (itemstack1.getItem() instanceof BannerPatternItem) {
+                } else if (isPattern) {
                     if (!this.mergeItemStack(itemstack1, this.slotPattern.slotNumber, this.slotPattern.slotNumber + 1, false)) {
                         return ItemStack.EMPTY;
                     }

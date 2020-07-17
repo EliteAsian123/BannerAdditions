@@ -1,6 +1,7 @@
 package eliteasian.mods.banneradditions;
 
 import eliteasian.mods.banneradditions.banner.*;
+import eliteasian.mods.banneradditions.bannerpattern.NewBannerPatternItem;
 import eliteasian.mods.banneradditions.loom.NewLoomBlock;
 import eliteasian.mods.banneradditions.loom.NewLoomContainer;
 import eliteasian.mods.banneradditions.shield.NewShieldItem;
@@ -11,15 +12,12 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.LoomContainer;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.ICraftingRecipe;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
 
 import java.util.ArrayList;
@@ -136,6 +134,15 @@ public final class BannerAdditionsRegistry {
 
         public static final Item SHIELD = reg(new NewShieldItem((new Item.Properties()).maxDamage(336).group(ItemGroup.COMBAT)), "shield");
 
+        public static final Item GLOBE_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "globe_banner_pattern");
+        public static final Item CREEPER_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "creeper_banner_pattern");
+        public static final Item SKULL_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "skull_banner_pattern");
+        public static final Item FLOWER_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "flower_banner_pattern");
+        public static final Item MOJANG_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "mojang_banner_pattern");
+        public static final Item PIGLIN_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "piglin_banner_pattern");
+
+        public static final Item SWORD_BANNER_PATTERN = regMod(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "sword_banner_pattern");
+
         private static Item regBanner(Item item, String name) {
             item.setRegistryName(new ResourceLocation("minecraft", name));
             BANNER_ITEMS.add(item);
@@ -146,12 +153,27 @@ public final class BannerAdditionsRegistry {
             return item.setRegistryName(new ResourceLocation("minecraft", name));
         }
 
+        private static Item regMod(Item item, String name) {
+            return item.setRegistryName(new ResourceLocation(BannerAdditions.MOD_ID, name));
+        }
+
         public static void registerAllItems(final RegistryEvent.Register<Item> event) {
             event.getRegistry().registerAll(BANNER_ITEMS.toArray(new Item[0]));
 
             event.getRegistry().registerAll(
                     LOOM,
-                    SHIELD
+
+                    SHIELD,
+
+                    GLOBE_BANNER_PATTERN,
+                    CREEPER_BANNER_PATTERN,
+                    SKULL_BANNER_PATTERN,
+                    FLOWER_BANNER_PATTERN,
+                    FLOWER_BANNER_PATTERN,
+                    MOJANG_BANNER_PATTERN,
+                    PIGLIN_BANNER_PATTERN,
+
+                    SWORD_BANNER_PATTERN
             );
         }
     }

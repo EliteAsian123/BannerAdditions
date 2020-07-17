@@ -1,13 +1,15 @@
 package eliteasian.mods.banneradditions;
 
-import eliteasian.mods.banneradditions.banner.BannerPatterns;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import eliteasian.mods.banneradditions.banner.NewBannerTileEntityRenderer;
 import eliteasian.mods.banneradditions.loom.NewLoomScreen;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -22,7 +24,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod("banneradditions")
+@Mod(BannerAdditions.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BannerAdditions {
     public static BannerAdditions instance;
@@ -42,10 +44,12 @@ public class BannerAdditions {
         modLoader.getModEventBus().addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        ((IReloadableResourceManager) Minecraft.getInstance().getResourceManager()).addReloadListener(BannerPatterns.INSTANCE);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        BannerPatterns.scan();
+
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
@@ -82,11 +86,11 @@ public class BannerAdditions {
     @SubscribeEvent
     public static void atlasTextures(final TextureStitchEvent.Pre event) {
         if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/banner_patterns.png"))) {
-            for (int i : BannerPatterns.getAtlasNeededPatterns()) {
+            for (int i = 0; i < BannerPatterns.getLength(); i++) {
                 event.addSprite(BannerPatterns.get(i).getBannerTexture());
             }
         } else if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/shield_patterns.png"))) {
-            for (int i : BannerPatterns.getAtlasNeededPatterns()) {
+            for (int i = 0; i < BannerPatterns.getLength(); i++) {
                 event.addSprite(BannerPatterns.get(i).getShieldTexture());
             }
         }

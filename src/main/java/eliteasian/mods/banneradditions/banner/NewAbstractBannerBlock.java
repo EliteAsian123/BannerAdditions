@@ -1,6 +1,6 @@
 package eliteasian.mods.banneradditions.banner;
 
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.LivingEntity;
@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 public abstract class NewAbstractBannerBlock extends ContainerBlock {
     private final DyeColor color;
 
-    protected NewAbstractBannerBlock(DyeColor color, AbstractBlock.Properties properties) {
+    protected NewAbstractBannerBlock(DyeColor color, Block.Properties properties) {
         super(properties);
         this.color = color;
     }

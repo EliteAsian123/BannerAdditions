@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mojang.datafixers.util.Pair;
 import java.util.List;
 
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallBannerBlock;
 import net.minecraft.client.renderer.Atlases;
@@ -60,7 +61,6 @@ public class NewBannerTileEntityRenderer extends TileEntityRenderer<NewBannerTil
                     matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
                     this.field_228834_c_.showModel = true;
                 } else {
-                    // TODO Change WallBannerBlock
                     matrixStackIn.translate(0.5D, (double)-0.16666667F, 0.5D);
                     float f3 = -blockstate.get(WallBannerBlock.HORIZONTAL_FACING).getHorizontalAngle();
                     matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f3));

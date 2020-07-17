@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
-import eliteasian.mods.banneradditions.banner.NewAbstractBannerBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

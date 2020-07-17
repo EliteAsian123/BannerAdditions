@@ -7,6 +7,9 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
+import net.minecraft.block.AbstractBannerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
@@ -91,6 +94,7 @@ public class NewBannerTileEntity extends TileEntity implements INameable, IForge
         return compound;
     }
 
+    // Read
     public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
         super.func_230337_a_(p_230337_1_, p_230337_2_);
         if (p_230337_2_.contains("CustomName", 8)) {
