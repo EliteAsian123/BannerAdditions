@@ -14,5 +14,5 @@ BannerAdditions adds more banner patterns to Minecraft (1.16.1)! **This mod is s
 BannerAdditions will be available on CurseForge soon. 
 
 # License
-All of **my code** is under the MIT License ([license here](../blob/master/LICENSE)).<br>
-All of **Forge's** is under a different license ([license here](../blob/master/FORGE_LICENSE)).
+All of **my code** is under the MIT License ([license here](../master/LICENSE)).<br>
+All of **Forge's** is under a different license ([license here](../master/FORGE_LICENSE)).
