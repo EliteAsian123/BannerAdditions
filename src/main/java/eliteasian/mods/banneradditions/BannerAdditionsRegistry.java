@@ -169,7 +169,6 @@ public final class BannerAdditionsRegistry {
                     CREEPER_BANNER_PATTERN,
                     SKULL_BANNER_PATTERN,
                     FLOWER_BANNER_PATTERN,
-                    FLOWER_BANNER_PATTERN,
                     MOJANG_BANNER_PATTERN,
                     PIGLIN_BANNER_PATTERN,
 
@@ -179,11 +178,10 @@ public final class BannerAdditionsRegistry {
     }
 
     public static class CraftingRecipes {
-        // Minecraft just has a weird name for this recipe type
-        public static final IRecipeSerializer<ShieldRecipe> SHIELD_RECIPE = reg(new ShieldRecipe.Serializer(), "crafting_special_shielddecoration");
+        public static final IRecipeSerializer<ShieldRecipe> SHIELD_RECIPE = reg(new ShieldRecipe.Serializer(), "shield_recipe");
 
         private static <T extends ICraftingRecipe> IRecipeSerializer<T> reg(IRecipeSerializer<T> recipeSerializer, String name) {
-            return (IRecipeSerializer<T>) recipeSerializer.setRegistryName(new ResourceLocation("minecraft", name));
+            return (IRecipeSerializer<T>) recipeSerializer.setRegistryName(new ResourceLocation(BannerAdditions.MOD_ID, name));
         }
 
         public static void registerAllRecipes(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
