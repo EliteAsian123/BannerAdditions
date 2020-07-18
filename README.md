@@ -10,12 +10,12 @@ This mod is still in beta, so I recommend you use this mod with caution.
 - ✔ Banner Pattern Items can have more than one pattern on them.
 - ✔ Shield support.
 - ✔ Easy custom banner patterns (with resource packs).
-- ❌ Animated banner patterns.
+- ✔ Animated banner patterns.
 
 ### Details
 BannerAdditions adds some banner patterns by default. There are currently only a couple, but more will be added in the future.<br><br>
-<img src="../master/screenshots/banner_0.png" width="450" height="300"><br><br>
-The checkerboard pattern can be found in the loom without any pattern item. However the sword patterns require the sword pattern item which can be crafted like so:<br><br>
+<img src="../master/screenshots/banner_0.png" width="516" height="265"><br><br>
+The checkerboard pattern and the horizontal paly pattern can be found in the loom without any pattern item. However the sword patterns require the sword pattern item which can be crafted like so:<br><br>
 <img src="../master/screenshots/crafting_swords.png" width="404" height="128"><br><br>
 Along with this, some of the normal banner pattern recipes have gotten less expensive.<br><br>
 <img src="../master/screenshots/crafting_creeper_charge.png" width="412" height="128"><br>
