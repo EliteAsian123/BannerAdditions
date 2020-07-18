@@ -4,7 +4,7 @@ Since Minecraft is dumb and all of the banner patterns are hard coded, I decided
 This mod is still in beta, so I recommend you use this mod with caution.
 
 # Features (and Planned Features)
-### 0. Overview
+### Overview
 - ✔ More banner patterns.
 - ✔ More than 6 patterns on a banner (now 12).
 - ✔ Banner Pattern Items can have more than one pattern on them.
@@ -12,7 +12,7 @@ This mod is still in beta, so I recommend you use this mod with caution.
 - ✔ Easy custom banner patterns (with resource packs).
 - ❌ Animated banner patterns.
 
-### 1. More Banner Patterns
+### Details
 BannerAdditions adds some banner patterns by default. There are currently only a couple, but more will be added in the future.<br><br>
 <img src="../master/screenshots/banner_0.png" width="450" height="300"><br><br>
 The checkerboard pattern can be found in the loom without any pattern item. However the sword patterns require the sword pattern item which can be crafted like so:<br><br>
@@ -21,9 +21,6 @@ Along with this, some of the normal banner pattern recipes have gotten less expe
 <img src="../master/screenshots/crafting_creeper_charge.png" width="412" height="128"><br>
 <img src="../master/screenshots/crafting_skull_charge.png" width="404" height="128"><br>
 <img src="../master/screenshots/crafting_thing_charge.png" width="404" height="128"><br>
-
-### 2. Custom Banner Patterns
-Todo
 
 # Download
 [Download mod from Github](https://github.com/EliteAsian123/BannerAdditions/releases) (Click the down arrow beside "assets" and download the jar file on the lastest version).<br>
