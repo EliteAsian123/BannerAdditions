@@ -142,6 +142,7 @@ public final class BannerAdditionsRegistry {
         public static final Item PIGLIN_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "piglin_banner_pattern");
 
         public static final Item SWORD_BANNER_PATTERN = regMod(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "sword_banner_pattern");
+        public static final Item ANIMATED_BANNER_PATTERN = regMod(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "animated_banner_pattern");
 
         private static Item regBanner(Item item, String name) {
             item.setRegistryName(new ResourceLocation("minecraft", name));
@@ -172,7 +173,8 @@ public final class BannerAdditionsRegistry {
                     MOJANG_BANNER_PATTERN,
                     PIGLIN_BANNER_PATTERN,
 
-                    SWORD_BANNER_PATTERN
+                    SWORD_BANNER_PATTERN,
+                    ANIMATED_BANNER_PATTERN
             );
         }
     }

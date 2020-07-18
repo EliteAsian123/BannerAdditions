@@ -1,0 +1,6 @@
+{
+	"hashname": "ssh",
+	
+	"bannerTexture": "banneradditions:entity/banner/small_stripes_horizontal",
+	"shieldTexture": "banneradditions:entity/shield/small_stripes_horizontal"
+}

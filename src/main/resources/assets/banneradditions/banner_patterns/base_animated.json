@@ -1,0 +1,8 @@
+{
+	"hashname": "a_b",
+	
+	"bannerTexture": "banneradditions:entity/banner/base_animated",
+	"shieldTexture": "banneradditions:entity/shield/base_animated",
+	
+	"item": "banneradditions:animated_banner_pattern"
+}
