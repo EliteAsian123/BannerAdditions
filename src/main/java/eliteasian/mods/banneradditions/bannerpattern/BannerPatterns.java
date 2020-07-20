@@ -2,39 +2,34 @@ package eliteasian.mods.banneradditions.bannerpattern;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import eliteasian.mods.banneradditions.BannerAdditions;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
-import net.minecraft.client.resources.ReloadListener;
+import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.profiler.IProfiler;
-import net.minecraft.resources.IResource;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class BannerPatterns extends ReloadListener<BannerPatterns> {
-    public static final BannerPatterns INSTANCE = new BannerPatterns();
-
+public class BannerPatterns extends JsonReloadListener {
     private static final List<BannerPatternHolder> bannerPatterns = new ArrayList<BannerPatternHolder>();
 
-    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
+    public BannerPatterns() {
+        super((new GsonBuilder()).setPrettyPrinting().create(), "banner_patterns");
+    }
 
-    protected BannerPatterns prepare(IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        profilerIn.startTick();
-
-        profilerIn.startSection("static");
-
+    protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
         bannerPatterns.clear();
 
         regStatic("base", "b");
@@ -79,48 +74,33 @@ public class BannerPatterns extends ReloadListener<BannerPatterns> {
         regStatic("mojang", "moj", BannerAdditionsRegistry.Items.MOJANG_BANNER_PATTERN);
         regStatic("piglin", "pig", BannerAdditionsRegistry.Items.PIGLIN_BANNER_PATTERN);
 
-        profilerIn.endStartSection("register");
+        for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
+            ResourceLocation resourceLocation = entry.getKey();
 
-        for(ResourceLocation resourceLocation : resourceManagerIn.getAllResourceLocations("banner_patterns", (p_215274_0_) ->
-                p_215274_0_.endsWith(".json")
-        )) {
-            try {
-                IResource resource = resourceManagerIn.getResource(resourceLocation);
+            // Skip Metadata
+            if(resourceLocation.getPath().startsWith("_"))
+                continue;
 
-                InputStream inputstream = resource.getInputStream();
-                Reader reader = new BufferedReader(new InputStreamReader(inputstream, StandardCharsets.UTF_8));
+            JsonObject json = JSONUtils.getJsonObject(entry.getValue(), "top element");
 
-                JsonObject json = JSONUtils.fromJson(GSON, reader, JsonObject.class);
+            String hashname = JSONUtils.getString(json, "hashname");
 
-                String hashname = JSONUtils.getString(json, "hashname");
+            ResourceLocation bannerTexture = new ResourceLocation(JSONUtils.getString(json, "bannerTexture"));
+            ResourceLocation shieldTexture = new ResourceLocation(JSONUtils.getString(json, "shieldTexture"));
 
-                ResourceLocation bannerTexture = new ResourceLocation(JSONUtils.getString(json, "bannerTexture"));
-                ResourceLocation shieldTexture = new ResourceLocation(JSONUtils.getString(json, "shieldTexture"));
+            String[] pathSplit = resourceLocation.getPath().split("/");
+            String name = pathSplit[pathSplit.length - 1];
 
-                String[] pathSplit = resourceLocation.getPath().split("/");
-                String name = pathSplit[pathSplit.length - 1].split("\\.")[0];
+            BannerAdditions.LOGGER.debug("TEST " + name);
 
-                if (JSONUtils.hasField(json, "item")) {
-                    ResourceLocation item = new ResourceLocation(JSONUtils.getString(json, "item"));
+            if (JSONUtils.hasField(json, "item")) {
+                ResourceLocation item = new ResourceLocation(JSONUtils.getString(json, "item"));
 
-                    bannerPatterns.add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name, item));
-
-                    BannerAdditions.LOGGER.debug("HEYO " + item);
-                } else {
-                    bannerPatterns.add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name));
-                }
-            } catch (IOException ignored) { }
+                bannerPatterns.add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name, item));
+            } else {
+                bannerPatterns.add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name));
+            }
         }
-
-        profilerIn.endSection();
-
-        profilerIn.endTick();
-
-        return INSTANCE;
-    }
-
-    protected void apply(BannerPatterns objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-
     }
 
     public static void regStatic(String name, String hashname, Item item) {
@@ -147,17 +127,6 @@ public class BannerPatterns extends ReloadListener<BannerPatterns> {
 
     public static int getLength() {
         return bannerPatterns.size();
-    }
-
-    public static int getPatternCountWithItem() {
-        int i = 0;
-        for (BannerPatternHolder bannerPatternHolder : bannerPatterns) {
-            if (bannerPatternHolder.getItem() != null) {
-                i++;
-            }
-        }
-
-        return i;
     }
 
     public static ListNBT toListNBT(Pair<BannerPatternHolder, DyeColor>... patterns) {

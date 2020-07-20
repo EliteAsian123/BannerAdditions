@@ -1,7 +1,8 @@
 package eliteasian.mods.banneradditions;
 
-import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatternTextureHandler;
 import eliteasian.mods.banneradditions.banner.NewBannerTileEntityRenderer;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import eliteasian.mods.banneradditions.loom.NewLoomScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -14,6 +15,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -27,7 +29,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(BannerAdditions.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BannerAdditions {
-    public static BannerAdditions instance;
+    public static BannerAdditions INSTANCE;
 
     public static final String MOD_ID = "banneradditions";
 
@@ -36,16 +38,18 @@ public class BannerAdditions {
     public static final int MAX_PATTERN_COUNT = 12;
 
     public BannerAdditions() {
-        instance = this;
+        INSTANCE = this;
 
         FMLJavaModLoadingContext modLoader = FMLJavaModLoadingContext.get();
 
         modLoader.getModEventBus().addListener(this::setup);
         modLoader.getModEventBus().addListener(this::clientSetup);
 
+        MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
+
         MinecraftForge.EVENT_BUS.register(this);
 
-        ((IReloadableResourceManager) Minecraft.getInstance().getResourceManager()).addReloadListener(BannerPatterns.INSTANCE);
+        ((IReloadableResourceManager) Minecraft.getInstance().getResourceManager()).addReloadListener(BannerPatternTextureHandler.INSTANCE);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -56,6 +60,10 @@ public class BannerAdditions {
         ClientRegistry.bindTileEntityRenderer(BannerAdditionsRegistry.TileEntities.BANNER, NewBannerTileEntityRenderer::new);
 
         ScreenManager.registerFactory(BannerAdditionsRegistry.Containers.LOOM, NewLoomScreen::new);
+    }
+
+    private void onAddReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(new BannerPatterns());
     }
 
     @SubscribeEvent
@@ -86,12 +94,12 @@ public class BannerAdditions {
     @SubscribeEvent
     public static void atlasTextures(final TextureStitchEvent.Pre event) {
         if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/banner_patterns.png"))) {
-            for (int i = 0; i < BannerPatterns.getLength(); i++) {
-                event.addSprite(BannerPatterns.get(i).getBannerTexture());
+            for (ResourceLocation i : BannerPatternTextureHandler.bannerTextures) {
+                event.addSprite(i);
             }
         } else if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/shield_patterns.png"))) {
-            for (int i = 0; i < BannerPatterns.getLength(); i++) {
-                event.addSprite(BannerPatterns.get(i).getShieldTexture());
+            for (ResourceLocation i : BannerPatternTextureHandler.shieldTextures) {
+                event.addSprite(i);
             }
         }
     }
