@@ -9,7 +9,7 @@ This mod is still in beta, so I recommend you use this mod with caution.
 - ✔ More than 6 patterns on a banner (now 12).
 - ✔ Banner Pattern Items can have more than one pattern on them.
 - ✔ Shield support.
-- ❌ (Sort of) easy custom banner patterns (with datapacks and resource packs). **[Currently unworking due to bug]**
+- ❌ (Sort of) easy custom banner patterns (with datapacks and resource packs). **[Currently unworking due to [forge bug](https://github.com/MinecraftForge/MinecraftForge/issues/7003)]**
 - ✔ Animated banner patterns.
 
 ### Details
