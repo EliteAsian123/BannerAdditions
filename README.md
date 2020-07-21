@@ -3,7 +3,7 @@ BannerAdditions adds more banner patterns to Minecraft (1.16.1)!
 Since Minecraft is dumb and all of the banner patterns are hard coded, I decided to redo some parts of the system. Now, you can add your own banner patterns via resource pack!
 This mod is still in beta, so I recommend you use this mod with caution.
 
-# Features (and Planned Features)
+# Features
 ### Overview
 - ✔ More banner patterns.
 - ✔ More than 6 patterns on a banner (now 12).
