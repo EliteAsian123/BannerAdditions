@@ -27,9 +27,13 @@ This banner pattern also requires a banner pattern item which can be crafted lik
 <img src="../master/screenshots/crafting_animations.png" width="404" height="128"><br><br>
 
 # Download
-**FORGE 1.16.1 32.0.71 REQUIRED**<br>
-[Download mod from Github](https://github.com/EliteAsian123/BannerAdditions/releases) (Click the down arrow beside "assets" and download the jar file on the lastest version).<br>
+### FORGE 1.16.1 32.0.71 OR LATER REQUIRED
+[Github mod download](https://github.com/EliteAsian123/BannerAdditions/releases) (click on the `.jar` file and put it in your mods folder).<br>
 BannerAdditions will be available on CurseForge soon. 
+
+# Creating your own Banner Patterns
+See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Custom-Banner-Patterns)!<br>
+If you have any issues with this, create a issue on the [issues tab](https://github.com/EliteAsian123/BannerAdditions/issues) and I will respond as soon as I can!
 
 # License
 All of **my code** is under the MIT License ([license here](../master/LICENSE)).<br>
