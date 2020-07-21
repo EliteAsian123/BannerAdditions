@@ -27,6 +27,7 @@ This banner pattern also requires a banner pattern item which can be crafted lik
 <img src="../master/screenshots/crafting_animations.png" width="404" height="128"><br><br>
 
 # Download
+**FORGE 1.16.1 32.0.71 REQUIRED**<br>
 [Download mod from Github](https://github.com/EliteAsian123/BannerAdditions/releases) (Click the down arrow beside "assets" and download the jar file on the lastest version).<br>
 BannerAdditions will be available on CurseForge soon. 
 
