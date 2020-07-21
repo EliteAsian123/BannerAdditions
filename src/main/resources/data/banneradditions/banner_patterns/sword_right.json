@@ -1,8 +1,8 @@
 {
 	"hashname": "sr",
 	
-	"bannerTexture": "banneradditions:entity/banner/sword_right",
-	"shieldTexture": "banneradditions:entity/shield/sword_right",
+	"bannerTexture": "banneradditions:sword_right",
+	"shieldTexture": "banneradditions:sword_right",
 	
 	"item": "banneradditions:sword_banner_pattern"
 }

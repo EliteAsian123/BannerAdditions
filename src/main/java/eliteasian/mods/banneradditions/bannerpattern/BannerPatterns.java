@@ -85,8 +85,11 @@ public class BannerPatterns extends JsonReloadListener {
 
             String hashname = JSONUtils.getString(json, "hashname");
 
-            ResourceLocation bannerTexture = new ResourceLocation(JSONUtils.getString(json, "bannerTexture"));
-            ResourceLocation shieldTexture = new ResourceLocation(JSONUtils.getString(json, "shieldTexture"));
+            ResourceLocation bannerTextureRaw = new ResourceLocation(JSONUtils.getString(json, "bannerTexture"));
+            ResourceLocation shieldTextureRaw = new ResourceLocation(JSONUtils.getString(json, "shieldTexture"));
+
+            ResourceLocation bannerTexture = new ResourceLocation(bannerTextureRaw.getNamespace(), "entity/banner/" + bannerTextureRaw.getPath());
+            ResourceLocation shieldTexture = new ResourceLocation(shieldTextureRaw.getNamespace(), "entity/banner/" + shieldTextureRaw.getPath());
 
             String[] pathSplit = resourceLocation.getPath().split("/");
             String name = pathSplit[pathSplit.length - 1];
