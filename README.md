@@ -29,7 +29,7 @@ This banner pattern also requires a banner pattern item which can be crafted lik
 # Download
 ### FORGE 1.16.1 32.0.71 OR LATER REQUIRED
 [Github mod download](https://github.com/EliteAsian123/BannerAdditions/releases) (click on the `.jar` file and put it in your mods folder).<br>
-BannerAdditions will be available on CurseForge soon. 
+[CurseForge mod download](https://www.curseforge.com/minecraft/mc-mods/banneradditions) (click on the `.jar` file and put it in your mods folder, or use the Twitch client).
 
 # Creating your own Banner Patterns
 See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Custom-Banner-Patterns)!<br>
