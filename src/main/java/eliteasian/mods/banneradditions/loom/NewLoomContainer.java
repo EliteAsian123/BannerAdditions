@@ -92,10 +92,7 @@ public class NewLoomContainer extends Container {
                     if (BannerPatterns.get(i).getItem().equals(stackitem.getRegistryName())) {
                         return true;
                     }
-                    BannerAdditions.LOGGER.debug(BannerPatterns.get(i).getItem());
                 }
-
-                BannerAdditions.LOGGER.debug("False for " + stackitem.getRegistryName());
 
                 return false;
             }

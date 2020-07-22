@@ -1,0 +1,8 @@
+{
+	"hashname": "a_bb",
+	
+	"bannerTexture": "banneradditions:base_blinking",
+	"shieldTexture": "banneradditions:base_blinking",
+	
+	"item": "banneradditions:animated_banner_pattern"
+}
