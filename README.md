@@ -14,7 +14,7 @@ This mod is still in beta, so I recommend you use this mod with caution.
 
 ### Details
 BannerAdditions adds some banner patterns by default. There are currently only a couple, but more will be added in the future.<br><br>
-<img src="../master/screenshots/banner_0.png" width="594"><br><br>
+<img src="../master/screenshots/banner_0.png" width="735"><br><br>
 Most of the patterns can be found in the loom without any pattern item. However the sword patterns require the sword pattern item which can be crafted like so:<br><br>
 <img src="../master/screenshots/crafting_swords.png" width="404" height="128"><br><br>
 Along with this, some of the normal banner pattern recipes have gotten less expensive.<br><br>
