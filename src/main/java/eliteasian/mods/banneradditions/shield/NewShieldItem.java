@@ -3,6 +3,7 @@ package eliteasian.mods.banneradditions.shield;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import eliteasian.mods.banneradditions.banner.BannerItemRenderer;
 import eliteasian.mods.banneradditions.banner.NewBannerItem;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class NewShieldItem extends ShieldItem {
     public NewShieldItem(Item.Properties builder) {
-        super(builder.setISTER(ShieldItemRenderer::ister));
+        super(builder.setISTER(() -> ShieldItemRenderer::new));
         DispenserBlock.registerDispenseBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
     }
 

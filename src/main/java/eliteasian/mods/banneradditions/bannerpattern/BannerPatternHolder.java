@@ -9,7 +9,6 @@ public class BannerPatternHolder {
     private final ResourceLocation shieldTexture;
 
     private final String hashname;
-
     private final String fullName;
 
     private final ResourceLocation item;
@@ -53,6 +52,10 @@ public class BannerPatternHolder {
 
     public String getTranslationKey() {
         return "block.minecraft.banner." + fullName;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
     public ResourceLocation getItem() {

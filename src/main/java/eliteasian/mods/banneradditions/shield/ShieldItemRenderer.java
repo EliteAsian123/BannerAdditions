@@ -13,16 +13,12 @@ import net.minecraft.client.renderer.entity.model.ShieldModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.model.ModelBakery;
 import net.minecraft.client.renderer.model.RenderMaterial;
-import net.minecraft.client.renderer.tileentity.BannerTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.item.*;
-import net.minecraft.tileentity.BannerPattern;
-import net.minecraft.tileentity.BannerTileEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 @OnlyIn(Dist.CLIENT)
 public class ShieldItemRenderer extends ItemStackTileEntityRenderer {
@@ -49,13 +45,5 @@ public class ShieldItemRenderer extends ItemStackTileEntityRenderer {
 
             p_239207_3_.pop();
         }
-    }
-
-    public static Callable<ItemStackTileEntityRenderer> ister() {
-        return instance::getSelf;
-    }
-
-    private ItemStackTileEntityRenderer getSelf() {
-        return instance;
     }
 }

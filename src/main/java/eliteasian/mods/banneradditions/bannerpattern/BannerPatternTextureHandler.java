@@ -4,10 +4,13 @@ import net.minecraft.client.resources.ReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public class BannerPatternTextureHandler extends ReloadListener<BannerPatternTextureHandler> {
 
     public static final BannerPatternTextureHandler INSTANCE = new BannerPatternTextureHandler();

@@ -1,36 +1,53 @@
 package eliteasian.mods.banneradditions.bannerpattern;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import eliteasian.mods.banneradditions.BannerAdditions;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
-import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.profiler.IProfiler;
+import net.minecraft.resources.IResource;
 import net.minecraft.resources.IResourceManager;
+import net.minecraft.resources.IResourceManagerReloadListener;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BannerPatterns extends JsonReloadListener {
-    private static final List<BannerPatternHolder> bannerPatterns = new ArrayList<BannerPatternHolder>();
+@SuppressWarnings("deprecation")
+public class BannerPatterns implements IResourceManagerReloadListener {
+    private static final List<BannerPatternHolder> bannerPatterns = new ArrayList<>();
 
-    public BannerPatterns() {
-        super((new GsonBuilder()).setPrettyPrinting().create(), "banner_patterns");
+    private static final Gson GSON = new Gson();
+
+    @Override
+    public void onResourceManagerReload(IResourceManager resourceManagerIn) {
+        Map<ResourceLocation, JsonElement> map = new HashMap<>();
+
+        for (ResourceLocation resourceLocation : resourceManagerIn.getAllResourceLocations("banner_patterns", i -> i.endsWith(".json"))) {
+            try (IResource resource = resourceManagerIn.getResource(resourceLocation)) {
+                InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+                ResourceLocation newResourceLocation = new ResourceLocation(resourceLocation.getNamespace(), resourceLocation.getPath().substring(0, resourceLocation.getPath().length() - 5));
+                map.put(newResourceLocation, GSON.fromJson(reader, JsonElement.class));
+            } catch (Exception e) {
+                BannerAdditions.LOGGER.error("Error loading Banner Pattern " + resourceLocation, e);
+            }
+        }
+
+        apply(map, resourceManagerIn);
     }
 
-    protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
-        bannerPatterns.clear();
+    private void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn) {
+        clear();
 
         regStatic("base", "b");
         regStatic("square_bottom_left", "bl");
@@ -97,9 +114,9 @@ public class BannerPatterns extends JsonReloadListener {
             if (JSONUtils.hasField(json, "item")) {
                 ResourceLocation item = new ResourceLocation(JSONUtils.getString(json, "item"));
 
-                bannerPatterns.add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name, item));
+                add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name, item));
             } else {
-                bannerPatterns.add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name));
+                add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name));
             }
         }
     }
@@ -110,6 +127,14 @@ public class BannerPatterns extends JsonReloadListener {
 
     public static void regStatic(String name, String hashname) {
         regStatic(name, hashname, Items.AIR);
+    }
+
+    public static void add(BannerPatternHolder bannerPatternHolder) {
+        bannerPatterns.add(bannerPatternHolder);
+    }
+
+    public static void clear() {
+        bannerPatterns.clear();
     }
 
     public static BannerPatternHolder get(int i) {
@@ -157,5 +182,9 @@ public class BannerPatterns extends JsonReloadListener {
         }
 
         return out.toArray(new BannerPatternHolder[0]);
+    }
+
+    public static List<BannerPatternHolder> getAsList() {
+        return new ArrayList<BannerPatternHolder>(bannerPatterns);
     }
 }

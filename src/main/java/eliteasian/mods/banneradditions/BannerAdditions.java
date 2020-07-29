@@ -4,6 +4,7 @@ import eliteasian.mods.banneradditions.bannerpattern.BannerPatternTextureHandler
 import eliteasian.mods.banneradditions.banner.NewBannerTileEntityRenderer;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import eliteasian.mods.banneradditions.loom.NewLoomScreen;
+import eliteasian.mods.banneradditions.network.BannerPatternsMessage;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
@@ -13,6 +14,8 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -23,6 +26,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +36,8 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BannerAdditions {
     public static BannerAdditions INSTANCE;
+
+    public static SimpleChannel SIMPLE_CHANNEL_INSTANCE;
 
     public static final String MOD_ID = "banneradditions";
 
@@ -49,11 +57,20 @@ public class BannerAdditions {
 
         MinecraftForge.EVENT_BUS.register(this);
 
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            clientConstructor();
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void clientConstructor() {
         ((IReloadableResourceManager) Minecraft.getInstance().getResourceManager()).addReloadListener(BannerPatternTextureHandler.INSTANCE);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        SIMPLE_CHANNEL_INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(MOD_ID, "network"), () -> "1", i -> true, i -> true);
 
+        SIMPLE_CHANNEL_INSTANCE.registerMessage(0, BannerPatternsMessage.class, BannerPatternsMessage::encode, BannerPatternsMessage::decode, BannerPatternsMessage::handle);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
@@ -92,7 +109,8 @@ public class BannerAdditions {
     }
 
     @SubscribeEvent
-    public static void atlasTextures(final TextureStitchEvent.Pre event) {
+    @OnlyIn(Dist.CLIENT)
+    public static void onTextureStitch(final TextureStitchEvent.Pre event) {
         if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/banner_patterns.png"))) {
             for (ResourceLocation i : BannerPatternTextureHandler.bannerTextures) {
                 event.addSprite(i);

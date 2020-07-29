@@ -10,8 +10,6 @@ import net.minecraft.item.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.concurrent.Callable;
-
 @OnlyIn(Dist.CLIENT)
 public class BannerItemRenderer extends ItemStackTileEntityRenderer {
     public static final BannerItemRenderer instance = new BannerItemRenderer();
@@ -29,13 +27,5 @@ public class BannerItemRenderer extends ItemStackTileEntityRenderer {
                 TileEntityRendererDispatcher.instance.renderItem(this.banner, p_239207_3_, p_239207_4_, p_239207_5_, p_239207_6_);
             }
         }
-    }
-
-    public static Callable<ItemStackTileEntityRenderer> ister() {
-        return instance::getSelf;
-    }
-
-    private ItemStackTileEntityRenderer getSelf() {
-        return instance;
     }
 }

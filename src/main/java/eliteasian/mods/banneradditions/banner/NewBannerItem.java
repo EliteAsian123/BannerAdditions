@@ -19,11 +19,12 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.commons.lang3.Validate;
 
 public class NewBannerItem extends WallOrFloorItem {
     public NewBannerItem(Block p_i48529_1_, Block p_i48529_2_, Item.Properties builder) {
-        super(p_i48529_1_, p_i48529_2_, builder.setISTER(BannerItemRenderer::ister));
+        super(p_i48529_1_, p_i48529_2_, builder.setISTER(() -> BannerItemRenderer::new));
         Validate.isInstanceOf(NewAbstractBannerBlock.class, p_i48529_1_);
         Validate.isInstanceOf(NewAbstractBannerBlock.class, p_i48529_2_);
     }
