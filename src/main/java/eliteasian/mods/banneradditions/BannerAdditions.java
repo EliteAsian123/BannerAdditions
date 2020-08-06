@@ -21,8 +21,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -43,12 +45,12 @@ public class BannerAdditions {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static final int MAX_PATTERN_COUNT = 12;
-
     public BannerAdditions() {
         INSTANCE = this;
 
         FMLJavaModLoadingContext modLoader = FMLJavaModLoadingContext.get();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BannerAdditionsConfig.FORGE_SPEC, "banneradditions.toml");
 
         modLoader.getModEventBus().addListener(this::setup);
         modLoader.getModEventBus().addListener(this::clientSetup);

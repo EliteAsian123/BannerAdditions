@@ -7,6 +7,7 @@ import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -57,5 +58,9 @@ public class NewBannerItem extends WallOrFloorItem {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         appendHoverTextFromTileEntityTag(stack, tooltip);
+    }
+
+    public EquipmentSlotType getEquipmentSlot() {
+        return EquipmentSlotType.HEAD;
     }
 }

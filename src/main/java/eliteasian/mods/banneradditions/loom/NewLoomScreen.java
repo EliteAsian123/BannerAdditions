@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import eliteasian.mods.banneradditions.BannerAdditions;
+import eliteasian.mods.banneradditions.BannerAdditionsConfig;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
 import eliteasian.mods.banneradditions.banner.*;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
@@ -244,7 +245,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
         ItemStack itemstack3 = this.container.getPatternSlot().getStack();
         CompoundNBT compoundnbt = itemstack1.getOrCreateChildTag("BlockEntityTag");
 
-        this.isMaxPatterns = compoundnbt.contains("Patterns", 9) && !itemstack1.isEmpty() && compoundnbt.getList("Patterns", 10).size() >= BannerAdditions.MAX_PATTERN_COUNT;
+        this.isMaxPatterns = compoundnbt.contains("Patterns", 9) && !itemstack1.isEmpty() && compoundnbt.getList("Patterns", 10).size() >= BannerAdditionsConfig.CONFIG.maxPatternCount.get();
 
         if (this.isMaxPatterns) {
             this.bannerPatterns = null;

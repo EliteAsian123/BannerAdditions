@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import eliteasian.mods.banneradditions.BannerAdditions;
+import eliteasian.mods.banneradditions.BannerAdditionsConfig;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
@@ -91,32 +92,34 @@ public class BannerPatterns implements IResourceManagerReloadListener {
         regStatic("mojang", "moj", BannerAdditionsRegistry.Items.MOJANG_BANNER_PATTERN);
         regStatic("piglin", "pig", BannerAdditionsRegistry.Items.PIGLIN_BANNER_PATTERN);
 
-        for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
-            ResourceLocation resourceLocation = entry.getKey();
+        if (!BannerAdditionsConfig.CONFIG.safeMode.get()) {
+            for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
+                ResourceLocation resourceLocation = entry.getKey();
 
-            // Skip Metadata
-            if(resourceLocation.getPath().startsWith("_"))
-                continue;
+                // Skip Metadata
+                if(resourceLocation.getPath().startsWith("_"))
+                    continue;
 
-            JsonObject json = JSONUtils.getJsonObject(entry.getValue(), "top element");
+                JsonObject json = JSONUtils.getJsonObject(entry.getValue(), "top element");
 
-            String hashname = JSONUtils.getString(json, "hashname");
+                String hashname = JSONUtils.getString(json, "hashname");
 
-            ResourceLocation bannerTextureRaw = new ResourceLocation(JSONUtils.getString(json, "bannerTexture"));
-            ResourceLocation shieldTextureRaw = new ResourceLocation(JSONUtils.getString(json, "shieldTexture"));
+                ResourceLocation bannerTextureRaw = new ResourceLocation(JSONUtils.getString(json, "bannerTexture"));
+                ResourceLocation shieldTextureRaw = new ResourceLocation(JSONUtils.getString(json, "shieldTexture"));
 
-            ResourceLocation bannerTexture = new ResourceLocation(bannerTextureRaw.getNamespace(), "entity/banner/" + bannerTextureRaw.getPath());
-            ResourceLocation shieldTexture = new ResourceLocation(shieldTextureRaw.getNamespace(), "entity/shield/" + shieldTextureRaw.getPath());
+                ResourceLocation bannerTexture = new ResourceLocation(bannerTextureRaw.getNamespace(), "entity/banner/" + bannerTextureRaw.getPath());
+                ResourceLocation shieldTexture = new ResourceLocation(shieldTextureRaw.getNamespace(), "entity/shield/" + shieldTextureRaw.getPath());
 
-            String[] pathSplit = resourceLocation.getPath().split("/");
-            String name = pathSplit[pathSplit.length - 1];
+                String[] pathSplit = resourceLocation.getPath().split("/");
+                String name = pathSplit[pathSplit.length - 1];
 
-            if (JSONUtils.hasField(json, "item")) {
-                ResourceLocation item = new ResourceLocation(JSONUtils.getString(json, "item"));
+                if (JSONUtils.hasField(json, "item")) {
+                    ResourceLocation item = new ResourceLocation(JSONUtils.getString(json, "item"));
 
-                add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name, item));
-            } else {
-                add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name));
+                    add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name, item));
+                } else {
+                    add(new BannerPatternHolder(bannerTexture, shieldTexture, hashname, name));
+                }
             }
         }
     }
