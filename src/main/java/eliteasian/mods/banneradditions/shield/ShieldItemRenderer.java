@@ -37,7 +37,7 @@ public class ShieldItemRenderer extends ItemStackTileEntityRenderer {
             IVertexBuilder ivertexbuilder = rendermaterial.getSprite().wrapBuffer(ItemRenderer.func_239391_c_(p_239207_4_, this.modelShield.getRenderType(rendermaterial.getAtlasLocation()), true, p_239207_1_.hasEffect()));
             this.modelShield.func_228294_b_().render(p_239207_3_, ivertexbuilder, p_239207_5_, p_239207_6_, 1.0F, 1.0F, 1.0F, 1.0F);
             if (flag) {
-                List<Pair<BannerPatternHolder, DyeColor>> list = NewBannerTileEntity.createPatternList(ShieldItem.getColor(p_239207_1_), NewBannerTileEntity.getPatternsFromItemStack(p_239207_1_));
+                List<Pair<BannerPatternHolder, DyeColor>> list = NewBannerTileEntity.createPatternList(NewShieldItem.getColor(p_239207_1_), NewBannerTileEntity.getPatternsFromItemStack(p_239207_1_));
                 NewBannerTileEntityRenderer.func_241717_a_(p_239207_3_, p_239207_4_, p_239207_5_, p_239207_6_, this.modelShield.func_228293_a_(), rendermaterial, false, list, p_239207_1_.hasEffect());
             } else {
                 this.modelShield.func_228293_a_().render(p_239207_3_, ivertexbuilder, p_239207_5_, p_239207_6_, 1.0F, 1.0F, 1.0F, 1.0F);

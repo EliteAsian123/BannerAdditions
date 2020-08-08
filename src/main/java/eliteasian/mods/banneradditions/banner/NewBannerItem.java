@@ -59,8 +59,4 @@ public class NewBannerItem extends WallOrFloorItem {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         appendHoverTextFromTileEntityTag(stack, tooltip);
     }
-
-    public EquipmentSlotType getEquipmentSlot() {
-        return EquipmentSlotType.HEAD;
-    }
 }

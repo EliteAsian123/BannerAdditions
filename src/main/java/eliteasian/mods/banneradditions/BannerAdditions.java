@@ -6,6 +6,7 @@ import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import eliteasian.mods.banneradditions.loom.NewLoomScreen;
 import eliteasian.mods.banneradditions.network.BannerPatternsMessage;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
@@ -14,10 +15,12 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.coremod.api.ASMAPI;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,6 +36,9 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.lang.reflect.Field;
+import java.util.Map;
 
 @Mod(BannerAdditions.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -73,6 +79,25 @@ public class BannerAdditions {
         SIMPLE_CHANNEL_INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(MOD_ID, "network"), () -> "1", i -> true, i -> true);
 
         SIMPLE_CHANNEL_INSTANCE.registerMessage(0, BannerPatternsMessage.class, BannerPatternsMessage::encode, BannerPatternsMessage::decode, BannerPatternsMessage::handle);
+
+        // Villager point of interests
+        try {
+            Field f = PointOfInterestType.class.getDeclaredField(ASMAPI.mapField("field_221073_u"));
+            f.setAccessible(true);
+
+            BannerAdditionsRegistry.Blocks.LOOM.getStateContainer().getValidStates().forEach(s -> putBlockInPOI(f, s, PointOfInterestType.SHEPHERD));
+            BannerAdditionsRegistry.Blocks.CAULDRON.getStateContainer().getValidStates().forEach(s -> putBlockInPOI(f, s, PointOfInterestType.LEATHERWORKER));
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void putBlockInPOI(Field f, BlockState s, PointOfInterestType p) {
+        try {
+            ((Map<BlockState, PointOfInterestType>) f.get(null)).put(s, p);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
