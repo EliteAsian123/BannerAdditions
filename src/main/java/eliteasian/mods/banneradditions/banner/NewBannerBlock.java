@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,7 +30,7 @@ public class NewBannerBlock extends NewAbstractBannerBlock {
     private static final Map<DyeColor, Block> BANNERS_BY_COLOR = Maps.newHashMap();
     private static final VoxelShape SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
-    public NewBannerBlock(DyeColor color, AbstractBlock.Properties properties) {
+    public NewBannerBlock(DyeColor color, Block.Properties properties) {
         super(color, properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(ROTATION, Integer.valueOf(0)));
         BANNERS_BY_COLOR.put(color, this);

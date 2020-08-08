@@ -41,7 +41,7 @@ public class NewBannerItem extends WallOrFloorItem {
                 DyeColor dyecolor = DyeColor.byId(compoundnbt1.getInt("Color"));
                 BannerPatternHolder bannerpattern = BannerPatterns.get(compoundnbt1.getString("Pattern"));
                 if (bannerpattern != null) {
-                    p_185054_1_.add((new TranslationTextComponent(bannerpattern.getTranslationKey() + '.' + dyecolor.getTranslationKey())).func_240699_a_(TextFormatting.GRAY));
+                    p_185054_1_.add((new TranslationTextComponent(bannerpattern.getTranslationKey() + '.' + dyecolor.getTranslationKey())).applyTextStyle(TextFormatting.GRAY));
                 }
             }
 
@@ -58,9 +58,5 @@ public class NewBannerItem extends WallOrFloorItem {
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         appendHoverTextFromTileEntityTag(stack, tooltip);
-    }
-
-    public EquipmentSlotType getEquipmentSlot() {
-        return EquipmentSlotType.HEAD;
     }
 }

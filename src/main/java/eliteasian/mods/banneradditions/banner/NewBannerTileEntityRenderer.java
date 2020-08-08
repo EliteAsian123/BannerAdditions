@@ -11,15 +11,15 @@ import net.minecraft.block.WallBannerBlock;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.renderer.model.Material;
 import net.minecraft.client.renderer.model.ModelBakery;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -84,17 +84,17 @@ public class NewBannerTileEntityRenderer extends TileEntityRenderer<NewBannerTil
         }
     }
 
-    public static void func_230180_a_(MatrixStack p_230180_0_, IRenderTypeBuffer p_230180_1_, int p_230180_2_, int p_230180_3_, ModelRenderer p_230180_4_, RenderMaterial p_230180_5_, boolean p_230180_6_, List<Pair<BannerPatternHolder, DyeColor>> p_230180_7_) {
+    public static void func_230180_a_(MatrixStack p_230180_0_, IRenderTypeBuffer p_230180_1_, int p_230180_2_, int p_230180_3_, ModelRenderer p_230180_4_, Material p_230180_5_, boolean p_230180_6_, List<Pair<BannerPatternHolder, DyeColor>> p_230180_7_) {
         func_241717_a_(p_230180_0_, p_230180_1_, p_230180_2_, p_230180_3_, p_230180_4_, p_230180_5_, p_230180_6_, p_230180_7_, false);
     }
 
-    public static void func_241717_a_(MatrixStack p_241717_0_, IRenderTypeBuffer p_241717_1_, int p_241717_2_, int p_241717_3_, ModelRenderer p_241717_4_, RenderMaterial p_241717_5_, boolean p_241717_6_, List<Pair<BannerPatternHolder, DyeColor>> p_241717_7_, boolean p_241717_8_) {
-        p_241717_4_.render(p_241717_0_, p_241717_5_.func_241742_a_(p_241717_1_, RenderType::getEntitySolid, p_241717_8_), p_241717_2_, p_241717_3_);
+    public static void func_241717_a_(MatrixStack p_241717_0_, IRenderTypeBuffer p_241717_1_, int p_241717_2_, int p_241717_3_, ModelRenderer p_241717_4_, Material p_241717_5_, boolean p_241717_6_, List<Pair<BannerPatternHolder, DyeColor>> p_241717_7_, boolean p_241717_8_) {
+        p_241717_4_.render(p_241717_0_, p_241717_5_.getBuffer(p_241717_1_, RenderType::getEntitySolid), p_241717_2_, p_241717_3_);
 
         for(int i = 0; i < 17 && i < p_241717_7_.size(); ++i) {
             Pair<BannerPatternHolder, DyeColor> pair = p_241717_7_.get(i);
             float[] afloat = pair.getSecond().getColorComponentValues();
-            RenderMaterial rendermaterial = new RenderMaterial(p_241717_6_ ? Atlases.BANNER_ATLAS : Atlases.SHIELD_ATLAS, p_241717_6_ ? pair.getFirst().getBannerTexture() : pair.getFirst().getShieldTexture());
+            Material rendermaterial = new Material(p_241717_6_ ? Atlases.BANNER_ATLAS : Atlases.SHIELD_ATLAS, p_241717_6_ ? pair.getFirst().getBannerTexture() : pair.getFirst().getShieldTexture());
             p_241717_4_.render(p_241717_0_, rendermaterial.getBuffer(p_241717_1_, RenderType::getEntityNoOutline), p_241717_2_, p_241717_3_, afloat[0], afloat[1], afloat[2], 1.0F);
         }
     }

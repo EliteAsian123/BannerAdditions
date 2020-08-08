@@ -42,7 +42,7 @@ public class NewCauldronBlock extends CauldronBlock {
                     worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
 
-                return ActionResultType.func_233537_a_(worldIn.isRemote);
+                return ActionResultType.SUCCESS;
             } else if (item == Items.BUCKET) {
                 if (i == 3 && !worldIn.isRemote) {
                     if (!player.abilities.isCreativeMode) {
@@ -59,7 +59,7 @@ public class NewCauldronBlock extends CauldronBlock {
                     worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
 
-                return ActionResultType.func_233537_a_(worldIn.isRemote);
+                return ActionResultType.SUCCESS;
             } else if (item == Items.GLASS_BOTTLE) {
                 if (i > 0 && !worldIn.isRemote) {
                     if (!player.abilities.isCreativeMode) {
@@ -79,7 +79,7 @@ public class NewCauldronBlock extends CauldronBlock {
                     this.setWaterLevel(worldIn, pos, state, i - 1);
                 }
 
-                return ActionResultType.func_233537_a_(worldIn.isRemote);
+                return ActionResultType.SUCCESS;
             } else if (item == Items.POTION && PotionUtils.getPotionFromItem(itemstack) == Potions.WATER) {
                 if (i < 3 && !worldIn.isRemote) {
                     if (!player.abilities.isCreativeMode) {
@@ -95,7 +95,7 @@ public class NewCauldronBlock extends CauldronBlock {
                     this.setWaterLevel(worldIn, pos, state, i + 1);
                 }
 
-                return ActionResultType.func_233537_a_(worldIn.isRemote);
+                return ActionResultType.SUCCESS;
             } else {
                 if (i > 0 && item instanceof IDyeableArmorItem) {
                     IDyeableArmorItem idyeablearmoritem = (IDyeableArmorItem)item;
@@ -127,7 +127,7 @@ public class NewCauldronBlock extends CauldronBlock {
                         }
                     }
 
-                    return ActionResultType.func_233537_a_(worldIn.isRemote);
+                    return ActionResultType.SUCCESS;
                 } else if (i > 0 && item instanceof BlockItem) {
                     Block block = ((BlockItem)item).getBlock();
                     if (block instanceof ShulkerBoxBlock && !worldIn.isRemote()) {

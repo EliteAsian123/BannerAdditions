@@ -1,0 +1,21 @@
+{
+	"item.minecraft.piglin_banner_pattern": "Banner Pattern",
+	"item.minecraft.piglin_banner_pattern.desc": "Snout",
+	
+	"block.minecraft.banner.piglin.black": "Black Snout",
+	"block.minecraft.banner.piglin.red": "Red Snout",
+	"block.minecraft.banner.piglin.green": "Green Snout",
+	"block.minecraft.banner.piglin.brown": "Brown Snout",
+	"block.minecraft.banner.piglin.blue": "Blue Snout",
+	"block.minecraft.banner.piglin.purple": "Purple Snout",
+	"block.minecraft.banner.piglin.cyan": "Cyan Snout",
+	"block.minecraft.banner.piglin.light_gray": "Light Gray Snout",
+	"block.minecraft.banner.piglin.gray": "Gray Snout",
+	"block.minecraft.banner.piglin.pink": "Pink Snout",
+	"block.minecraft.banner.piglin.lime": "Lime Snout",
+	"block.minecraft.banner.piglin.yellow": "Yellow Snout",
+	"block.minecraft.banner.piglin.light_blue": "Light Blue Snout",
+	"block.minecraft.banner.piglin.magenta": "Magenta Snout",
+	"block.minecraft.banner.piglin.orange": "Orange Snout",
+	"block.minecraft.banner.piglin.white": "White Snout"
+}

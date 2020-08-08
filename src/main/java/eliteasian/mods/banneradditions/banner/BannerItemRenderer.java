@@ -17,14 +17,14 @@ public class BannerItemRenderer extends ItemStackTileEntityRenderer {
     private final NewBannerTileEntity banner = new NewBannerTileEntity();
 
     @Override
-    public void func_239207_a_(ItemStack p_239207_1_, ItemCameraTransforms.TransformType p_239207_2_, MatrixStack p_239207_3_, IRenderTypeBuffer p_239207_4_, int p_239207_5_, int p_239207_6_) {
-        Item item = p_239207_1_.getItem();
+    public void render(ItemStack itemStackIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        Item item = itemStackIn.getItem();
         if (item instanceof BlockItem) {
             Block block = ((BlockItem) item).getBlock();
 
             if (block instanceof NewAbstractBannerBlock) {
-                this.banner.loadFromItemStack(p_239207_1_, ((NewAbstractBannerBlock) block).getColor());
-                TileEntityRendererDispatcher.instance.renderItem(this.banner, p_239207_3_, p_239207_4_, p_239207_5_, p_239207_6_);
+                this.banner.loadFromItemStack(itemStackIn, ((NewAbstractBannerBlock) block).getColor());
+                TileEntityRendererDispatcher.instance.renderItem(this.banner, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
             }
         }
     }

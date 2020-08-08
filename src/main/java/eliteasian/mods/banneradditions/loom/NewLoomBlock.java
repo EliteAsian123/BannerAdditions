@@ -1,12 +1,10 @@
 package eliteasian.mods.banneradditions.loom;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.inventory.container.LoomContainer;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
@@ -20,7 +18,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class NewLoomBlock extends HorizontalBlock {
-    public NewLoomBlock(AbstractBlock.Properties properties) {
+    public NewLoomBlock(Block.Properties properties) {
         super(properties);
     }
 
