@@ -23,7 +23,7 @@ Along with this, some of the normal banner pattern recipes have gotten less expe
 <img src="../master/screenshots/crafting_thing_charge.png" width="404" height="128"><br><br>
 There are also animated banner patterns:<br><br>
 <img src="../master/screenshots/banner_1.gif" width="359" height="292"><br><br>
-This banner pattern also requires a banner pattern item which can be crafted like so:<br><br>
+These banner patterns also require a banner pattern item which can be crafted like so:<br><br>
 <img src="../master/screenshots/crafting_animations.png" width="404" height="128"><br><br>
 
 # Download
