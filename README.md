@@ -3,7 +3,7 @@ BannerAdditions adds more banner patterns to Minecraft (1.16.1)!
 Since Minecraft is dumb and all of the banner patterns are hard coded, I decided to redo some parts of the system. Now, you can add your own banner patterns via resource pack!
 This mod is still in beta, so I recommend you use this mod with caution.
 
-# Features
+## Features
 ### Overview
 - ✔ More banner patterns.
 - ✔ More than 6 patterns on a banner (now 12).
@@ -26,14 +26,14 @@ There are also animated banner patterns:<br><br>
 These banner patterns also require a banner pattern item which can be crafted like so:<br><br>
 <img src="../1.16.2/screenshots/crafting_animations.png" width="404" height="128"><br><br>
 
-# Download
+## Download
 [Github mod download](https://github.com/EliteAsian123/BannerAdditions/releases) (click on the `.jar` file and put it in your mods folder).<br>
 [CurseForge mod download](https://www.curseforge.com/minecraft/mc-mods/banneradditions) (could be out of date compared to the Github download).
 
-# Creating your own Banner Patterns
+## Creating your own Banner Patterns
 See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Custom-Banner-Patterns)!<br>
 If you have any issues with this, create a issue on the [issues tab](https://github.com/EliteAsian123/BannerAdditions/issues) and I will respond as soon as I can!
 
-# License
+## License
 All of **my code** is under the MIT License ([license here](../1.16.2/LICENSE)).<br>
 All of **Forge's** is under a different license ([license here](../1.16.2/FORGE_LICENSE)).
