@@ -1,5 +1,5 @@
 # BannerAdditions
-BannerAdditions adds more banner patterns to Minecraft (1.16.1)!
+BannerAdditions adds more banner patterns to Minecraft (1.16.2)!
 Since Minecraft is dumb and all of the banner patterns are hard coded, I decided to redo some parts of the system. Now, you can add your own banner patterns via resource pack!
 This mod is still in beta, so I recommend you use this mod with caution.
 
@@ -29,6 +29,10 @@ These banner patterns also require a banner pattern item which can be crafted li
 ## Download
 [Github mod download](https://github.com/EliteAsian123/BannerAdditions/releases) (click on the `.jar` file and put it in your mods folder).<br>
 [CurseForge mod download](https://www.curseforge.com/minecraft/mc-mods/banneradditions) (could be out of date compared to the Github download).
+
+## Incompatibilities
+- [Bedspreads](https://www.curseforge.com/minecraft/mc-mods/bedspreads) (does not work at all)
+- [Cauldron Recipes](https://www.curseforge.com/minecraft/mc-mods/cauldron-recipes) (you cannot clear banner patterns in a cauldron)
 
 ## Creating your own Banner Patterns
 See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Custom-Banner-Patterns)!<br>
