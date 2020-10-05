@@ -40,5 +40,5 @@ See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Cu
 If you have any issues with this, create a issue on the [issues tab](https://github.com/EliteAsian123/BannerAdditions/issues) and I will respond as soon as I can!
 
 ## License
-All of **my code** is under the MIT License ([license here](../1.16.2/LICENSE)).<br>
-All of **Forge's** is under a different license ([license here](../1.16.2/FORGE_LICENSE)).
+All of **my code** is under the MIT License ([license here](../1.15.2/LICENSE)).<br>
+All of **Forge's** is under a different license ([license here](../1.15.2/FORGE_LICENSE)).
