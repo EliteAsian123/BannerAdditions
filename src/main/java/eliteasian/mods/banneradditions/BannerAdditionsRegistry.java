@@ -2,7 +2,6 @@ package eliteasian.mods.banneradditions;
 
 import eliteasian.mods.banneradditions.banner.*;
 import eliteasian.mods.banneradditions.bannerpattern.NewBannerPatternItem;
-import eliteasian.mods.banneradditions.cauldron.NewCauldronBlock;
 import eliteasian.mods.banneradditions.loom.NewLoomBlock;
 import eliteasian.mods.banneradditions.loom.NewLoomContainer;
 import eliteasian.mods.banneradditions.shield.NewShieldItem;
@@ -65,8 +64,6 @@ public final class BannerAdditionsRegistry {
 
         public static final Block LOOM = reg(new NewLoomBlock(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).sound(SoundType.WOOD)), "loom");
 
-        public static final Block CAULDRON = reg(new NewCauldronBlock(AbstractBlock.Properties.create(Material.IRON, MaterialColor.STONE).func_235861_h_().hardnessAndResistance(2.0F).notSolid()), "cauldron");
-
         private static Block regBanner(Block block, String name) {
             block.setRegistryName(new ResourceLocation("minecraft", name));
             BANNER_BLOCKS.add(block);
@@ -81,7 +78,6 @@ public final class BannerAdditionsRegistry {
             event.getRegistry().registerAll(BANNER_BLOCKS.toArray(new Block[0]));
 
             event.getRegistry().register(LOOM);
-            event.getRegistry().register(CAULDRON);
         }
     }
 
@@ -131,8 +127,6 @@ public final class BannerAdditionsRegistry {
 
         public static final Item LOOM = reg(new BlockItem(BannerAdditionsRegistry.Blocks.LOOM, (new Item.Properties()).group(ItemGroup.DECORATIONS)), "loom");
 
-        public static final Item CAULDRON = reg(new BlockItem(BannerAdditionsRegistry.Blocks.CAULDRON, (new Item.Properties()).group(ItemGroup.BREWING)), "cauldron");
-
         public static final Item SHIELD = reg(new NewShieldItem((new Item.Properties()).maxDamage(336).group(ItemGroup.COMBAT)), "shield");
 
         public static final Item GLOBE_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "globe_banner_pattern");
@@ -164,7 +158,6 @@ public final class BannerAdditionsRegistry {
 
             event.getRegistry().registerAll(
                     LOOM,
-                    CAULDRON,
 
                     SHIELD,
 
