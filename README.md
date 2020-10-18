@@ -12,6 +12,7 @@ This mod is still in beta, so I recommend you use this mod with caution.
 - ✔ Shield support.
 - ✔ (Sort of) easy custom banner patterns (with datapacks and resource packs).
 - ✔ Animated banner patterns.
+- ✔ Banners and Shields look better in item frames.
 
 ### Details
 BannerAdditions adds some banner patterns by default. There are currently only a couple, but more will be added in the future.<br><br>
