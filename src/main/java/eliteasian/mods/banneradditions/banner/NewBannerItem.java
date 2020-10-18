@@ -6,7 +6,12 @@ import javax.annotation.Nullable;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
@@ -14,6 +19,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.WallOrFloorItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -50,6 +58,29 @@ public class NewBannerItem extends WallOrFloorItem {
 
     public DyeColor getColor() {
         return ((NewAbstractBannerBlock)this.getBlock()).getColor();
+    }
+
+    public static void handleCauldron(PlayerEntity player, ItemStack itemstack, World worldIn, BlockPos pos, Hand handIn) {
+        if (NewBannerTileEntity.getPatterns(itemstack) > 0 && !worldIn.isRemote) {
+            ItemStack itemstack2 = itemstack.copy();
+            itemstack2.setCount(1);
+            NewBannerTileEntity.removeBannerData(itemstack2);
+
+            player.addStat(Stats.CLEAN_BANNER);
+            if (!player.abilities.isCreativeMode) {
+                itemstack.shrink(1);
+                BlockState blockState = worldIn.getBlockState(pos);
+                ((CauldronBlock) Blocks.CAULDRON).setWaterLevel(worldIn, pos, blockState, blockState.get(CauldronBlock.LEVEL) - 1);
+            }
+
+            if (itemstack.isEmpty()) {
+                player.setHeldItem(handIn, itemstack2);
+            } else if (!player.inventory.addItemStackToInventory(itemstack2)) {
+                player.dropItem(itemstack2, false);
+            } else if (player instanceof ServerPlayerEntity) {
+                ((ServerPlayerEntity) player).sendContainerToPlayer(player.container);
+            }
+        }
     }
 
     /**

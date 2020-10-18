@@ -1,5 +1,6 @@
 package eliteasian.mods.banneradditions;
 
+import eliteasian.mods.banneradditions.banner.NewBannerItem;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternTextureHandler;
 import eliteasian.mods.banneradditions.banner.NewBannerTileEntityRenderer;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
@@ -7,10 +8,12 @@ import eliteasian.mods.banneradditions.loom.NewLoomScreen;
 import eliteasian.mods.banneradditions.network.BannerPatternsMessage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraft.tileentity.TileEntityType;
@@ -22,6 +25,8 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.coremod.api.ASMAPI;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -37,6 +42,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nonnull;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -87,7 +93,6 @@ public class BannerAdditions {
             f.setAccessible(true);
 
             BannerAdditionsRegistry.Blocks.LOOM.getStateContainer().getValidStates().forEach(s -> putBlockInPOI(f, s, PointOfInterestType.SHEPHERD));
-            BannerAdditionsRegistry.Blocks.CAULDRON.getStateContainer().getValidStates().forEach(s -> putBlockInPOI(f, s, PointOfInterestType.LEATHERWORKER));
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -148,6 +153,22 @@ public class BannerAdditions {
         } else if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/shield_patterns.png"))) {
             for (ResourceLocation i : BannerPatternTextureHandler.shieldTextures) {
                 event.addSprite(i);
+            }
+        }
+    }
+
+    @SubscribeEvent(receiveCanceled = true)
+    public void onPlayerInteract(@Nonnull PlayerInteractEvent.RightClickBlock event) {
+        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
+
+        if (block == Blocks.CAULDRON) {
+            ItemStack itemstack = event.getItemStack();
+
+            if (itemstack.getItem() instanceof NewBannerItem) {
+                NewBannerItem.handleCauldron(event.getPlayer(), itemstack, event.getWorld(), event.getPos(), event.getHand());
+
+                event.setResult(Event.Result.ALLOW);
+                event.setCanceled(true);
             }
         }
     }
