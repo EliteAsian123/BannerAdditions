@@ -29,6 +29,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -57,6 +58,9 @@ public class BannerAdditions {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
+    // Compat for morewaterlogging
+    public static boolean morewaterloggingLoaded;
+
     public BannerAdditions() {
         INSTANCE = this;
 
@@ -74,6 +78,8 @@ public class BannerAdditions {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             clientConstructor();
         }
+
+        morewaterloggingLoaded = ModList.get().isLoaded("morewaterlogging");
     }
 
     @OnlyIn(Dist.CLIENT)
