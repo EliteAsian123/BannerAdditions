@@ -36,7 +36,7 @@ These banner patterns also require a banner pattern item which can be crafted li
 - [Cauldron Recipes](https://www.curseforge.com/minecraft/mc-mods/cauldron-recipes) (you cannot clear banner patterns in a cauldron)
 
 ## Compatibilities
-- [More Waterlogging](https://www.curseforge.com/minecraft/mc-mods/more-waterlogging)
+- [More Waterlogging](https://www.curseforge.com/minecraft/mc-mods/more-waterlogging) (you can put banners underwater!)
 
 ## Creating your own Banner Patterns
 See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Custom-Banner-Patterns)!<br>
