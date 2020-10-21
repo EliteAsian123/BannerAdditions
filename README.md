@@ -35,6 +35,9 @@ These banner patterns also require a banner pattern item which can be crafted li
 - [Bedspreads](https://www.curseforge.com/minecraft/mc-mods/bedspreads) (does not work at all)
 - [Cauldron Recipes](https://www.curseforge.com/minecraft/mc-mods/cauldron-recipes) (you cannot clear banner patterns in a cauldron)
 
+## Compatibilities
+- [More Waterlogging](https://www.curseforge.com/minecraft/mc-mods/more-waterlogging)
+
 ## Creating your own Banner Patterns
 See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Custom-Banner-Patterns)!<br>
 If you have any issues with this, create a issue on the [issues tab](https://github.com/EliteAsian123/BannerAdditions/issues) and I will respond as soon as I can!
