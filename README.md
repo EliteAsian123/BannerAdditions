@@ -14,7 +14,7 @@ This mod is still in beta, so I recommend you use this mod with caution.
 - ✔ Banners and Shields look better in item frames.
 
 ### Details
-BannerAdditions adds some banner patterns by default. There are currently only a couple, but more will be added in the future.<br><br>
+BannerAdditions adds some banner patterns by default:<br><br>
 <img src="../files/images/banner_0.png" width="735"><br><br>
 Most of the patterns can be found in the loom without any pattern item. However the sword patterns require the sword pattern item which can be crafted like so:<br><br>
 <img src="../files/images/crafting_swords.png" width="404" height="128"><br><br>
@@ -26,6 +26,8 @@ There are also animated banner patterns:<br><br>
 <img src="../files/images/banner_1.gif" width="359" height="292"><br><br>
 These banner patterns also require a banner pattern item which can be crafted like so:<br><br>
 <img src="../files/images/crafting_animations.png" width="404" height="128"><br><br>
+This mod also makes Banners and Shields to look better in item frames:<br><br>
+<img src="../files/images/itemframes.png" width="716" height="336">
 
 ## Download
 [Github mod download](https://github.com/EliteAsian123/BannerAdditions/releases) (click on the `.jar` file and put it in your mods folder).<br>
@@ -33,7 +35,6 @@ These banner patterns also require a banner pattern item which can be crafted li
 
 ## Incompatibilities
 - [Bedspreads](https://www.curseforge.com/minecraft/mc-mods/bedspreads) (does not work at all)
-- [Cauldron Recipes](https://www.curseforge.com/minecraft/mc-mods/cauldron-recipes) (you cannot clear banner patterns in a cauldron)
 
 ## Creating your own Banner Patterns
 See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Custom-Banner-Patterns)!<br>
