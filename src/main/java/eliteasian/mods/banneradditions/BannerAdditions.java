@@ -72,7 +72,6 @@ public class BannerAdditions {
 
         modLoader.getModEventBus().addListener(this::setup);
         modLoader.getModEventBus().addListener(this::clientSetup);
-        modLoader.getModEventBus().addListener(this::loadComplete);
 
         MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
 
@@ -105,10 +104,6 @@ public class BannerAdditions {
             e.printStackTrace();
         }
 
-        BannerPatterns.initStaticBannerPatterns();
-    }
-
-    private void loadComplete(final FMLLoadCompleteEvent event) {
         BannerPatterns.initStaticBannerPatterns();
     }
 
