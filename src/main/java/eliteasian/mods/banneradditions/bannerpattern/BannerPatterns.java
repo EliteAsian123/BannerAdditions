@@ -7,6 +7,7 @@ import com.mojang.datafixers.util.Pair;
 import eliteasian.mods.banneradditions.BannerAdditions;
 import eliteasian.mods.banneradditions.BannerAdditionsConfig;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
+import net.minecraft.item.BannerPatternItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -15,18 +16,22 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.resources.IResource;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.resources.IResourceManagerReloadListener;
+import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.coremod.api.ASMAPI;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SuppressWarnings("deprecation")
 public class BannerPatterns implements IResourceManagerReloadListener {
     private static final List<BannerPatternHolder> bannerPatterns = new ArrayList<>();
+    private static final List<BannerPatternHolder> staticBannerPatterns = new ArrayList<>();
 
     private static final Gson GSON = new Gson();
 
@@ -50,47 +55,7 @@ public class BannerPatterns implements IResourceManagerReloadListener {
     private void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn) {
         clear();
 
-        regStatic("base", "b");
-        regStatic("square_bottom_left", "bl");
-        regStatic("square_bottom_right", "br");
-        regStatic("square_top_left", "tl");
-        regStatic("square_top_right", "tr");
-        regStatic("stripe_bottom", "bs");
-        regStatic("stripe_top", "ts");
-        regStatic("stripe_left", "ls");
-        regStatic("stripe_right", "rs");
-        regStatic("stripe_center", "cs");
-        regStatic("stripe_middle", "ms");
-        regStatic("stripe_downright", "drs");
-        regStatic("stripe_downleft", "dls");
-        regStatic("small_stripes", "ss");
-        regStatic("cross", "cr");
-        regStatic("straight_cross", "sc");
-        regStatic("triangle_bottom", "bt");
-        regStatic("triangle_top", "tt");
-        regStatic("triangles_bottom", "bts");
-        regStatic("triangles_top", "tts");
-        regStatic("diagonal_left", "ld");
-        regStatic("diagonal_up_right", "rd");
-        regStatic("diagonal_up_left", "lud");
-        regStatic("diagonal_right", "rud");
-        regStatic("circle", "mc");
-        regStatic("rhombus", "mr");
-        regStatic("half_vertical", "vh");
-        regStatic("half_horizontal", "hh");
-        regStatic("half_vertical_right", "vhr");
-        regStatic("half_horizontal_bottom", "hhb");
-        regStatic("border", "bo");
-        regStatic("curly_border", "cbo");
-        regStatic("gradient", "gra");
-        regStatic("gradient_up", "gru");
-        regStatic("bricks", "bri");
-        regStatic("globe", "glb", BannerAdditionsRegistry.Items.GLOBE_BANNER_PATTERN);
-        regStatic("creeper", "cre", BannerAdditionsRegistry.Items.CREEPER_BANNER_PATTERN);
-        regStatic("skull", "sku", BannerAdditionsRegistry.Items.SKULL_BANNER_PATTERN);
-        regStatic("flower", "flo", BannerAdditionsRegistry.Items.FLOWER_BANNER_PATTERN);
-        regStatic("mojang", "moj", BannerAdditionsRegistry.Items.MOJANG_BANNER_PATTERN);
-        regStatic("piglin", "pig", BannerAdditionsRegistry.Items.PIGLIN_BANNER_PATTERN);
+        bannerPatterns.addAll(staticBannerPatterns);
 
         if (!BannerAdditionsConfig.CONFIG.safeMode.get()) {
             for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
@@ -125,7 +90,7 @@ public class BannerPatterns implements IResourceManagerReloadListener {
     }
 
     public static void regStatic(String name, String hashname, Item item) {
-        bannerPatterns.add(new BannerPatternHolder(new ResourceLocation("minecraft", "entity/banner/" + name), new ResourceLocation("minecraft", "entity/shield/" + name), hashname, name, item.getRegistryName()));
+        staticBannerPatterns.add(new BannerPatternHolder(new ResourceLocation("minecraft", "entity/banner/" + name), new ResourceLocation("minecraft", "entity/shield/" + name), hashname, name, item.getRegistryName()));
     }
 
     public static void regStatic(String name, String hashname) {
@@ -189,5 +154,29 @@ public class BannerPatterns implements IResourceManagerReloadListener {
 
     public static List<BannerPatternHolder> getAsList() {
         return new ArrayList<BannerPatternHolder>(bannerPatterns);
+    }
+
+    public static void initStaticBannerPatterns() {
+        List<Item> items = ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof BannerPatternItem).collect(Collectors.toList());
+
+        for (BannerPattern pattern : BannerPattern.values()) {
+            List<Item> patternItem = items.stream().filter(item -> ((BannerPatternItem) item).func_219980_b().equals(pattern)).collect(Collectors.toList());
+            if (patternItem.size() <= 0)
+                regStatic(getBannerPatternFileName(pattern), pattern.getHashname());
+            else
+                regStatic(getBannerPatternFileName(pattern), pattern.getHashname(), patternItem.get(0));
+        }
+    }
+
+    // We do this because BannerPattern.getFileName() is client only
+    private static String getBannerPatternFileName(BannerPattern bannerPattern) {
+        try {
+            Field field = BannerPattern.class.getDeclaredField(ASMAPI.mapField("field_191014_N"));
+            field.setAccessible(true);
+            return (String) field.get(bannerPattern);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

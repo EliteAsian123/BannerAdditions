@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.resources.IReloadableResourceManager;
+import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.village.PointOfInterestType;
@@ -36,6 +37,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -70,6 +72,7 @@ public class BannerAdditions {
 
         modLoader.getModEventBus().addListener(this::setup);
         modLoader.getModEventBus().addListener(this::clientSetup);
+        modLoader.getModEventBus().addListener(this::loadComplete);
 
         MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
 
@@ -101,6 +104,12 @@ public class BannerAdditions {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
+
+        BannerPatterns.initStaticBannerPatterns();
+    }
+
+    private void loadComplete(final FMLLoadCompleteEvent event) {
+        BannerPatterns.initStaticBannerPatterns();
     }
 
     private static void putBlockInPOI(Field f, BlockState s, PointOfInterestType p) {

@@ -129,13 +129,6 @@ public final class BannerAdditionsRegistry {
 
         public static final Item SHIELD = reg(new NewShieldItem((new Item.Properties()).maxDamage(336).group(ItemGroup.COMBAT)), "shield");
 
-        public static final Item GLOBE_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "globe_banner_pattern");
-        public static final Item CREEPER_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "creeper_banner_pattern");
-        public static final Item SKULL_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "skull_banner_pattern");
-        public static final Item FLOWER_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "flower_banner_pattern");
-        public static final Item MOJANG_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "mojang_banner_pattern");
-        public static final Item PIGLIN_BANNER_PATTERN = reg(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "piglin_banner_pattern");
-
         public static final Item SWORD_BANNER_PATTERN = regMod(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "sword_banner_pattern");
         public static final Item ANIMATED_BANNER_PATTERN = regMod(new NewBannerPatternItem((new Item.Properties()).maxStackSize(1).group(ItemGroup.MISC)), "animated_banner_pattern");
 
@@ -160,13 +153,6 @@ public final class BannerAdditionsRegistry {
                     LOOM,
 
                     SHIELD,
-
-                    GLOBE_BANNER_PATTERN,
-                    CREEPER_BANNER_PATTERN,
-                    SKULL_BANNER_PATTERN,
-                    FLOWER_BANNER_PATTERN,
-                    MOJANG_BANNER_PATTERN,
-                    PIGLIN_BANNER_PATTERN,
 
                     SWORD_BANNER_PATTERN,
                     ANIMATED_BANNER_PATTERN
