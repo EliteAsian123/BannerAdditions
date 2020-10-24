@@ -75,8 +75,6 @@ public class BannerAdditions {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             clientConstructor();
         }
-
-        BannerPatterns.initStaticBannerPatterns();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -98,6 +96,8 @@ public class BannerAdditions {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
+
+        BannerPatterns.initStaticBannerPatterns();
     }
 
     private static void putBlockInPOI(Field f, BlockState s, PointOfInterestType p) {
