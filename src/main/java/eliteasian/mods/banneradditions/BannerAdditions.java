@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.resources.IReloadableResourceManager;
+import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.village.PointOfInterestType;
@@ -74,6 +75,8 @@ public class BannerAdditions {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             clientConstructor();
         }
+
+        BannerPatterns.initStaticBannerPatterns();
     }
 
     @OnlyIn(Dist.CLIENT)
