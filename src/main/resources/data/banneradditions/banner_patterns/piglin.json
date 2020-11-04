@@ -1,0 +1,8 @@
+{
+	"hashname": "pig",
+	
+	"bannerTexture": "minecraft:piglin",
+	"shieldTexture": "minecraft:piglin",
+	
+	"item": "minecraft:piglin_banner_pattern"
+}
