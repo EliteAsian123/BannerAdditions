@@ -19,9 +19,7 @@ BannerAdditions adds some banner patterns by default:<br><br>
 <img src="../files/images/banner_0.png" width="735"><br><br>
 Most of the patterns can be found in the loom without any pattern item. However the sword patterns require the sword pattern item which can be crafted like so:<br><br>
 <img src="../files/images/crafting_swords.png" width="404" height="128"><br><br>
-Along with this, some of the normal banner pattern recipes have gotten less expensive.<br><br>
-<img src="../files/images/crafting_creeper_charge.png" width="412" height="128"><br>
-<img src="../files/images/crafting_skull_charge.png" width="404" height="128"><br>
+Along with this, the banner pattern recipe for the "Thing" has gotten less expensive.<br><br>
 <img src="../files/images/crafting_thing_charge.png" width="404" height="128"><br><br>
 There are also animated banner patterns:<br><br>
 <img src="../files/images/banner_1.gif" width="359" height="292"><br><br>

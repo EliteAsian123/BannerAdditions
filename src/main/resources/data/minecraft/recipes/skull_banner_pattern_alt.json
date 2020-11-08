@@ -5,10 +5,10 @@
       "item": "minecraft:paper"
     },
     {
-      "item": "minecraft:gunpowder"
+      "item": "minecraft:skeleton_skull"
     }
   ],
   "result": {
-    "item": "minecraft:creeper_banner_pattern"
+    "item": "minecraft:skull_banner_pattern"
   }
 }
