@@ -89,7 +89,7 @@ public class NewBannerTileEntityRenderer extends TileEntityRenderer<NewBannerTil
     }
 
     public static void func_241717_a_(MatrixStack p_241717_0_, IRenderTypeBuffer p_241717_1_, int p_241717_2_, int p_241717_3_, ModelRenderer p_241717_4_, RenderMaterial p_241717_5_, boolean p_241717_6_, List<Pair<BannerPatternHolder, DyeColor>> p_241717_7_, boolean p_241717_8_) {
-        p_241717_4_.render(p_241717_0_, p_241717_5_.func_241742_a_(p_241717_1_, RenderType::getEntitySolid, p_241717_8_), p_241717_2_, p_241717_3_);
+        p_241717_4_.render(p_241717_0_, p_241717_5_.getItemRendererBuffer(p_241717_1_, RenderType::getEntitySolid, p_241717_8_), p_241717_2_, p_241717_3_);
 
         for(int i = 0; i < 17 && i < p_241717_7_.size(); ++i) {
             Pair<BannerPatternHolder, DyeColor> pair = p_241717_7_.get(i);

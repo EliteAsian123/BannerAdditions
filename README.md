@@ -1,5 +1,5 @@
 # BannerAdditions
-BannerAdditions adds more banner patterns to Minecraft (1.16.3)!
+BannerAdditions adds more banner patterns to Minecraft (1.16.4)!
 Since Minecraft is dumb and all of the banner patterns are hard coded, I decided to redo some parts of the system. Now, you can add your own banner patterns via resource pack!
 This mod is still in beta, so I recommend you use this mod with caution.
 
@@ -42,5 +42,5 @@ See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Cu
 If you have any issues with this, create a issue on the [issues tab](https://github.com/EliteAsian123/BannerAdditions/issues) and I will respond as soon as I can!
 
 ## License
-All of **my code** is under the MIT License ([license here](../1.16.3/LICENSE)).<br>
-All of **Forge's** is under a different license ([license here](../1.16.3/FORGE_LICENSE)).
+All of **my code** is under the MIT License ([license here](../1.16.4/LICENSE)).<br>
+All of **Forge's** is under a different license ([license here](../1.16.4/FORGE_LICENSE)).

@@ -160,7 +160,7 @@ public class BannerPatterns implements IResourceManagerReloadListener {
         List<Item> items = ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof BannerPatternItem).collect(Collectors.toList());
 
         for (BannerPattern pattern : BannerPattern.values()) {
-            List<Item> patternItem = items.stream().filter(item -> ((BannerPatternItem) item).func_219980_b().equals(pattern)).collect(Collectors.toList());
+            List<Item> patternItem = items.stream().filter(item -> ((BannerPatternItem) item).getBannerPattern().equals(pattern)).collect(Collectors.toList());
             if (patternItem.size() <= 0)
                 regStatic(getBannerPatternFileName(pattern), pattern.getHashname());
             else

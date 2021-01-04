@@ -94,11 +94,10 @@ public class NewBannerTileEntity extends TileEntity implements INameable, IForge
         return compound;
     }
 
-    // Read
-    public void func_230337_a_(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-        super.func_230337_a_(p_230337_1_, p_230337_2_);
+    public void read(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
+        super.read(p_230337_1_, p_230337_2_);
         if (p_230337_2_.contains("CustomName", 8)) {
-            this.name = ITextComponent.Serializer.func_240643_a_(p_230337_2_.getString("CustomName"));
+            this.name = ITextComponent.Serializer.getComponentFromJson(p_230337_2_.getString("CustomName"));
         }
 
         if (this.hasWorld()) {

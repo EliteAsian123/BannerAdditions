@@ -50,50 +50,50 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
         super(p_i51081_1_, p_i51081_2_, p_i51081_3_);
         this.bannerRenderer = NewBannerTileEntityRenderer.func_228836_a_();
         p_i51081_1_.func_217020_a(this::update);
-        this.field_238743_q_ -= 2;
+        this.titleY -= 2;
 
         this.patternLength = BannerPatterns.getWithItem(null).length;
     }
 
     // Render
-    public void func_230430_a_(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-        super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
-        this.func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_);
+    public void render(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
+        super.render(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
+        this.renderHoveredTooltip(p_230430_1_, p_230430_2_, p_230430_3_);
     }
 
     /**
      * Draws the background layer of this container (behind the items).
      */
-    protected void func_230450_a_(MatrixStack matrixStack, float p_230450_2_, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float p_230450_2_, int mouseX, int mouseY) {
         // Render background
-        this.func_230446_a_(matrixStack);
+        this.renderBackground(matrixStack);
 
-        this.field_230706_i_.getTextureManager().bindTexture(guiTexture);
+        this.minecraft.getTextureManager().bindTexture(guiTexture);
         int i = this.guiLeft;
         int j = this.guiTop;
-        this.func_238474_b_(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
+        this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
         Slot slot = this.container.getBannerSlot();
         Slot slot1 = this.container.getDyeSlot();
         Slot slot2 = this.container.getPatternSlot();
         Slot slot3 = this.container.getOutputSlot();
 
         if (!slot.getHasStack()) {
-            this.func_238474_b_(matrixStack, i + slot.xPos, j + slot.yPos, this.xSize, 0, 16, 16);
+            this.blit(matrixStack, i + slot.xPos, j + slot.yPos, this.xSize, 0, 16, 16);
         }
 
         if (!slot1.getHasStack()) {
-            this.func_238474_b_(matrixStack,i + slot1.xPos, j + slot1.yPos, this.xSize + 16, 0, 16, 16);
+            this.blit(matrixStack,i + slot1.xPos, j + slot1.yPos, this.xSize + 16, 0, 16, 16);
         }
 
         if (!slot2.getHasStack()) {
-            this.func_238474_b_(matrixStack,i + slot2.xPos, j + slot2.yPos, this.xSize + 32, 0, 16, 16);
+            this.blit(matrixStack,i + slot2.xPos, j + slot2.yPos, this.xSize + 32, 0, 16, 16);
         }
 
         int k = (int)(41.0F * this.scrollAmountFloat);
-        this.func_238474_b_(matrixStack,i + 119, j + 13 + k, 232 + (this.hasNeededItems ? 0 : 12), 0, 12, 15);
+        this.blit(matrixStack,i + 119, j + 13 + k, 232 + (this.hasNeededItems ? 0 : 12), 0, 12, 15);
         RenderHelper.setupGuiFlatDiffuseLighting();
         if (this.bannerPatterns != null && !this.isMaxPatterns) {
-            IRenderTypeBuffer.Impl irendertypebuffer$impl = this.field_230706_i_.getRenderTypeBuffers().getBufferSource();
+            IRenderTypeBuffer.Impl irendertypebuffer$impl = this.minecraft.getRenderTypeBuffers().getBufferSource();
             matrixStack.push();
             matrixStack.translate((double)(i + 139), (double)(j + 52), 0.0D);
             matrixStack.scale(24.0F, -24.0F, 1.0F);
@@ -106,7 +106,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
             matrixStack.pop();
             irendertypebuffer$impl.finish();
         } else if (this.isMaxPatterns) {
-            this.func_238474_b_(matrixStack, i + slot3.xPos - 2, j + slot3.yPos - 2, this.xSize, 17, 17, 16);
+            this.blit(matrixStack, i + slot3.xPos - 2, j + slot3.yPos - 2, this.xSize, 17, 17, 16);
         }
 
         if (this.hasNeededItems) {
@@ -120,7 +120,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
                 int j1 = i1 - this.scrollAmount;
                 int k1 = j2 + j1 % 4 * 14;
                 int l1 = l2 + j1 / 4 * 14;
-                this.field_230706_i_.getTextureManager().bindTexture(guiTexture);
+                this.minecraft.getTextureManager().bindTexture(guiTexture);
                 int i2 = this.ySize;
                 if (i1 == (this.patternStack.getItem() == Items.AIR ? this.container.getSelectedPattern() : this.container.getSelectedPattern() + 1)) {
                     i2 += 14;
@@ -128,7 +128,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
                     i2 += 28;
                 }
 
-                this.func_238474_b_(matrixStack, k1, l1, 0, i2, 14, 14);
+                this.blit(matrixStack, k1, l1, 0, i2, 14, 14);
                 this.renderPatternButton(bannerPatterns[this.patternStack.getItem() == Items.AIR ? i1 : i1 - 1], k1, l1);
             }
         }
@@ -150,7 +150,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
         matrixstack.translate(0.5D, 0.5D, 0.5D);
         float f = 0.6666667F;
         matrixstack.scale(f, -f, -f);
-        IRenderTypeBuffer.Impl irendertypebuffer$impl = this.field_230706_i_.getRenderTypeBuffers().getBufferSource();
+        IRenderTypeBuffer.Impl irendertypebuffer$impl = this.minecraft.getRenderTypeBuffers().getBufferSource();
         this.bannerRenderer.rotateAngleX = 0.0F;
         this.bannerRenderer.rotationPointY = -32.0F;
         List<Pair<BannerPatternHolder, DyeColor>> list = NewBannerTileEntity.createPatternList(DyeColor.GRAY, NewBannerTileEntity.getPatternsFromItemStack(itemstack));
@@ -160,7 +160,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
     }
 
     // Mouse clicked
-    public boolean func_231044_a_(double p_231044_1_, double p_231044_3_, int p_231044_5_) {
+    public boolean mouseClicked(double p_231044_1_, double p_231044_3_, int p_231044_5_) {
         this.scrollSelected = false;
 
         if (this.hasNeededItems) {
@@ -174,10 +174,10 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
                 double d0 = p_231044_1_ - (double)(containerLeft + i1 % 4 * 14);
                 double d1 = p_231044_3_ - (double)(containerTop + i1 / 4 * 14);
 
-                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 14.0D && d1 < 14.0D && this.container.enchantItem(this.field_230706_i_.player, this.patternStack.getItem() == Items.AIR ? l : l - 1)) {
+                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 14.0D && d1 < 14.0D && this.container.enchantItem(this.minecraft.player, this.patternStack.getItem() == Items.AIR ? l : l - 1)) {
                     Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_LOOM_SELECT_PATTERN, 1.0F));
 
-                    this.field_230706_i_.playerController.sendEnchantPacket((this.container).windowId, this.patternStack.getItem() == Items.AIR ? l : l - 1);
+                    this.minecraft.playerController.sendEnchantPacket((this.container).windowId, this.patternStack.getItem() == Items.AIR ? l : l - 1);
 
                     return true;
                 }
@@ -190,11 +190,11 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
             }
         }
 
-        return super.func_231044_a_(p_231044_1_, p_231044_3_, p_231044_5_);
+        return super.mouseClicked(p_231044_1_, p_231044_3_, p_231044_5_);
     }
 
     // Mouse dragged
-    public boolean func_231045_a_(double p_231045_1_, double p_231045_3_, int p_231045_5_, double p_231045_6_, double p_231045_8_) {
+    public boolean mouseDragged(double p_231045_1_, double p_231045_3_, int p_231045_5_, double p_231045_6_, double p_231045_8_) {
         if (this.scrollSelected && this.hasNeededItems && this.patternLength > 16) {
             int containerTop = this.guiTop + 13;
             int j = containerTop + 56;
@@ -212,12 +212,12 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
 
             return true;
         } else {
-            return super.func_231045_a_(p_231045_1_, p_231045_3_, p_231045_5_, p_231045_6_, p_231045_8_);
+            return super.mouseDragged(p_231045_1_, p_231045_3_, p_231045_5_, p_231045_6_, p_231045_8_);
         }
     }
 
     // Scroll with scroll wheel
-    public boolean func_231043_a_(double p_231043_1_, double p_231043_3_, double p_231043_5_) {
+    public boolean mouseScrolled(double p_231043_1_, double p_231043_3_, double p_231043_5_) {
         if (this.hasNeededItems && this.patternLength > 16) {
             float i = this.patternLength / 4f - 4f;
             this.scrollAmountFloat = (float) ((double) this.scrollAmountFloat - p_231043_5_ / (double) i);
