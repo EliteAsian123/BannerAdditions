@@ -1,12 +1,12 @@
 # BannerAdditions
-BannerAdditions adds more banner patterns to Minecraft (1.16.4)!
+BannerAdditions adds more banner patterns to Minecraft (1.16.x)!
 Since Minecraft is dumb and all of the banner patterns are hard coded, I decided to redo some parts of the system. Now, you can add your own banner patterns via resource pack!
 This mod is still in beta, so I recommend you use this mod with caution.
 
 ## Features
 ### Overview
 - ✔ More banner patterns.
-- ✔ More than 6 patterns on a banner (now 12).
+- ✔ More than 6 patterns on a banner (now 12, but customizable).
 - ✔ Banner Pattern Items can have more than one pattern on them.
 - ✔ Shield support.
 - ✔ (Sort of) easy custom banner patterns (with datapacks and resource packs).
@@ -32,7 +32,8 @@ This mod also makes Banners and Shields to look better in item frames:<br><br>
 [CurseForge mod download](https://www.curseforge.com/minecraft/mc-mods/banneradditions) (could be out of date compared to the Github download).
 
 ## Incompatibilities
-- [Bedspreads](https://www.curseforge.com/minecraft/mc-mods/bedspreads) (does not work at all)
+- [Bedspreads](https://www.curseforge.com/minecraft/mc-mods/bedspreads) (bedspreads cannot be crafted)
+- [Block Diversity](https://www.curseforge.com/minecraft/mc-mods/block-diversity) (doesn't load)
 
 ## Compatibilities
 - [More Waterlogging](https://www.curseforge.com/minecraft/mc-mods/more-waterlogging) (you can put banners underwater!)
@@ -42,5 +43,5 @@ See the [wiki](https://github.com/EliteAsian123/BannerAdditions/wiki/Creating-Cu
 If you have any issues with this, create a issue on the [issues tab](https://github.com/EliteAsian123/BannerAdditions/issues) and I will respond as soon as I can!
 
 ## License
-All of **my code** is under the MIT License ([license here](../1.16.4/LICENSE)).<br>
-All of **Forge's** is under a different license ([license here](../1.16.4/FORGE_LICENSE)).
+All of **my code** is under the MIT License ([license here](../1.16.x/LICENSE)).<br>
+All of **Forge's** is under a different license ([license here](../1.16.x/FORGE_LICENSE)).
