@@ -1,10 +1,9 @@
 package eliteasian.mods.banneradditions.loom;
 
-import eliteasian.mods.banneradditions.BannerAdditions;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
-import eliteasian.mods.banneradditions.banner.NewBannerItem;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -68,7 +67,7 @@ public class NewLoomContainer extends Container {
              * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
              */
             public boolean isItemValid(ItemStack stack) {
-                return stack.getItem() instanceof NewBannerItem;
+                return stack.getItem() instanceof BannerItem;
             }
         });
 
@@ -147,7 +146,7 @@ public class NewLoomContainer extends Container {
      * Determines whether supplied player can use this container
      */
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(this.worldPos, playerIn, BannerAdditionsRegistry.Blocks.LOOM);
+        return isWithinUsableDistance(this.worldPos, playerIn, Blocks.LOOM);
     }
 
     /**
@@ -209,7 +208,7 @@ public class NewLoomContainer extends Container {
 
                 slot.onSlotChange(itemstack1, itemstack);
             } else if (index != this.slotDye.slotNumber && index != this.slotBanner.slotNumber && index != this.slotPattern.slotNumber) {
-                if (itemstack1.getItem() instanceof NewBannerItem) {
+                if (itemstack1.getItem() instanceof BannerItem) {
                     if (!this.mergeItemStack(itemstack1, this.slotBanner.slotNumber, this.slotBanner.slotNumber + 1, false)) {
                         return ItemStack.EMPTY;
                     }

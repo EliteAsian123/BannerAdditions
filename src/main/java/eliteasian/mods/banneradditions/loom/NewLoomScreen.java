@@ -137,10 +137,10 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
     }
 
     private void renderPatternButton(BannerPatternHolder p_228190_1_, int p_228190_2_, int p_228190_3_) {
-        ItemStack itemstack = new ItemStack(BannerAdditionsRegistry.Items.GRAY_BANNER);
+        ItemStack itemstack = new ItemStack(Items.GRAY_BANNER);
 
         CompoundNBT compoundnbt = itemstack.getOrCreateChildTag("BlockEntityTag");
-        compoundnbt.put("Patterns", BannerPatterns.toListNBT(new Pair<>(BannerPatterns.get(0), DyeColor.GRAY), new Pair<>(p_228190_1_, DyeColor.WHITE)));
+        compoundnbt.put("Patterns", BannerPatterns.toListNBT(new Pair<>(BannerPatterns.get(0), DyeColor.WHITE), new Pair<>(p_228190_1_, DyeColor.GRAY)));
 
         MatrixStack matrixstack = new MatrixStack();
         matrixstack.push();
@@ -153,7 +153,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
         IRenderTypeBuffer.Impl irendertypebuffer$impl = this.minecraft.getRenderTypeBuffers().getBufferSource();
         this.bannerRenderer.rotateAngleX = 0.0F;
         this.bannerRenderer.rotationPointY = -32.0F;
-        List<Pair<BannerPatternHolder, DyeColor>> list = NewBannerTileEntity.createPatternList(DyeColor.GRAY, NewBannerTileEntity.getPatternsFromItemStack(itemstack));
+        List<Pair<BannerPatternHolder, DyeColor>> list = NewBannerTileEntity.createPatternList(DyeColor.WHITE, NewBannerTileEntity.getPatternsFromItemStack(itemstack));
         NewBannerTileEntityRenderer.func_230180_a_(matrixstack, irendertypebuffer$impl, 15728880, OverlayTexture.NO_OVERLAY, this.bannerRenderer, ModelBakery.LOCATION_BANNER_BASE, true, list);
         matrixstack.pop();
         irendertypebuffer$impl.finish();
@@ -237,7 +237,7 @@ public class NewLoomScreen extends ContainerScreen<NewLoomContainer> {
         if (itemstack.isEmpty()) {
             this.bannerPatterns = null;
         } else {
-            this.bannerPatterns = NewBannerTileEntity.createPatternList(((NewBannerItem) itemstack.getItem()).getColor(), NewBannerTileEntity.getPatternsFromItemStack(itemstack));
+            this.bannerPatterns = NewBannerTileEntity.createPatternList(((BannerItem) itemstack.getItem()).getColor(), NewBannerTileEntity.getPatternsFromItemStack(itemstack));
         }
 
         ItemStack itemstack1 = this.container.getBannerSlot().getStack();

@@ -10,6 +10,7 @@ import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import net.minecraft.block.AbstractBannerBlock;
+import net.minecraft.block.BannerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
@@ -101,7 +102,7 @@ public class NewBannerTileEntity extends TileEntity implements INameable, IForge
         }
 
         if (this.hasWorld()) {
-            this.baseColor = ((NewAbstractBannerBlock)this.getBlockState().getBlock()).getColor();
+            this.baseColor = ((AbstractBannerBlock)this.getBlockState().getBlock()).getColor();
         } else {
             this.baseColor = null;
         }
@@ -193,7 +194,7 @@ public class NewBannerTileEntity extends TileEntity implements INameable, IForge
     }
 
     public ItemStack getItem(BlockState p_190615_1_) {
-        ItemStack itemstack = new ItemStack(NewBannerBlock.forColor(this.getBaseColor(() -> {
+        ItemStack itemstack = new ItemStack(BannerBlock.forColor(this.getBaseColor(() -> {
             return p_190615_1_;
         })));
         if (this.patterns != null && !this.patterns.isEmpty()) {
@@ -209,7 +210,7 @@ public class NewBannerTileEntity extends TileEntity implements INameable, IForge
 
     public DyeColor getBaseColor(Supplier<BlockState> p_195533_1_) {
         if (this.baseColor == null) {
-            this.baseColor = ((NewAbstractBannerBlock)p_195533_1_.get().getBlock()).getColor();
+            this.baseColor = ((AbstractBannerBlock)p_195533_1_.get().getBlock()).getColor();
         }
 
         return this.baseColor;

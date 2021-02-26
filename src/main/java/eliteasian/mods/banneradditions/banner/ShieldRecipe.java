@@ -1,10 +1,11 @@
-package eliteasian.mods.banneradditions.shield;
+package eliteasian.mods.banneradditions.banner;
 
 import com.google.gson.JsonObject;
 import eliteasian.mods.banneradditions.BannerAdditionsRegistry;
-import eliteasian.mods.banneradditions.banner.NewBannerItem;
 import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.item.BannerItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.SpecialRecipe;
 import net.minecraft.nbt.CompoundNBT;
@@ -22,65 +23,66 @@ public class ShieldRecipe extends SpecialRecipe {
      * Used to check if a recipe matches current crafting inventory
      */
     public boolean matches(CraftingInventory inv, World worldIn) {
-        ItemStack shieldStack = ItemStack.EMPTY;
-        ItemStack bannerStack = ItemStack.EMPTY;
+        ItemStack itemstack = ItemStack.EMPTY;
+        ItemStack itemstack1 = ItemStack.EMPTY;
 
         for(int i = 0; i < inv.getSizeInventory(); ++i) {
-            ItemStack itemstack = inv.getStackInSlot(i);
-            if (!itemstack.isEmpty()) {
-                if (itemstack.getItem() instanceof NewBannerItem) {
-                    if (!bannerStack.isEmpty()) {
+            ItemStack itemstack2 = inv.getStackInSlot(i);
+            if (!itemstack2.isEmpty()) {
+                if (itemstack2.getItem() instanceof BannerItem) {
+                    if (!itemstack1.isEmpty()) {
                         return false;
                     }
 
-                    bannerStack = itemstack;
+                    itemstack1 = itemstack2;
                 } else {
-                    if (itemstack.getItem() != BannerAdditionsRegistry.Items.SHIELD) {
+                    if (itemstack2.getItem() != Items.SHIELD) {
                         return false;
                     }
 
-                    if (!shieldStack.isEmpty()) {
+                    if (!itemstack.isEmpty()) {
                         return false;
                     }
 
-                    if (itemstack.getChildTag("BlockEntityTag") != null) {
+                    if (itemstack2.getChildTag("BlockEntityTag") != null) {
                         return false;
                     }
 
-                    shieldStack = itemstack;
+                    itemstack = itemstack2;
                 }
             }
         }
 
-        return !shieldStack.isEmpty() && !bannerStack.isEmpty();
+        return !itemstack.isEmpty() && !itemstack1.isEmpty();
     }
 
     /**
      * Returns an Item that is the result of this recipe
      */
     public ItemStack getCraftingResult(CraftingInventory inv) {
-        ItemStack bannerStack = ItemStack.EMPTY;
-        ItemStack shieldStack = ItemStack.EMPTY;
+        ItemStack itemstack = ItemStack.EMPTY;
+        ItemStack itemstack1 = ItemStack.EMPTY;
 
         for(int i = 0; i < inv.getSizeInventory(); ++i) {
             ItemStack itemstack2 = inv.getStackInSlot(i);
             if (!itemstack2.isEmpty()) {
-                if (itemstack2.getItem() instanceof NewBannerItem) {
-                    bannerStack = itemstack2;
-                } else if (itemstack2.getItem() == BannerAdditionsRegistry.Items.SHIELD) {
-                    shieldStack = itemstack2.copy();
+                if (itemstack2.getItem() instanceof BannerItem) {
+                    itemstack = itemstack2;
+                } else if (itemstack2.getItem() == Items.SHIELD) {
+                    itemstack1 = itemstack2.copy();
                 }
             }
         }
 
-        if (!shieldStack.isEmpty()) {
-            CompoundNBT compoundnbt = bannerStack.getChildTag("BlockEntityTag");
+        if (itemstack1.isEmpty()) {
+            return itemstack1;
+        } else {
+            CompoundNBT compoundnbt = itemstack.getChildTag("BlockEntityTag");
             CompoundNBT compoundnbt1 = compoundnbt == null ? new CompoundNBT() : compoundnbt.copy();
-            compoundnbt1.putInt("Base", ((NewBannerItem) bannerStack.getItem()).getColor().getId());
-            shieldStack.setTagInfo("BlockEntityTag", compoundnbt1);
+            compoundnbt1.putInt("Base", ((BannerItem)itemstack.getItem()).getColor().getId());
+            itemstack1.setTagInfo("BlockEntityTag", compoundnbt1);
+            return itemstack1;
         }
-
-        return shieldStack;
     }
 
     /**
@@ -91,7 +93,7 @@ public class ShieldRecipe extends SpecialRecipe {
     }
 
     public IRecipeSerializer<?> getSerializer() {
-        return IRecipeSerializer.CRAFTING_SPECIAL_SHIELD;
+        return BannerAdditionsRegistry.CraftingRecipes.SHIELD_RECIPE;
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ShieldRecipe> {

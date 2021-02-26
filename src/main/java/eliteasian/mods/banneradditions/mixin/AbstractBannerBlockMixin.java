@@ -1,5 +1,7 @@
-package eliteasian.mods.banneradditions.banner;
+package eliteasian.mods.banneradditions.mixin;
 
+import eliteasian.mods.banneradditions.banner.NewBannerTileEntity;
+import net.minecraft.block.AbstractBannerBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
@@ -10,31 +12,26 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 
 import javax.annotation.Nullable;
 
-public abstract class NewAbstractBannerBlock extends ContainerBlock {
-    private final DyeColor color;
+@Mixin(AbstractBannerBlock.class)
+public class AbstractBannerBlockMixin extends ContainerBlock {
+    @Shadow
+    private DyeColor color;
 
-    protected NewAbstractBannerBlock(DyeColor color, Block.Properties properties) {
+    protected AbstractBannerBlockMixin(Block.Properties properties) {
         super(properties);
-        this.color = color;
     }
 
-    /**
-     * Return true if an entity can be spawned inside the block (used to get the player's bed spawn location)
-     */
-    public boolean canSpawnInBlock() {
-        return true;
-    }
-
+    @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
         return new NewBannerTileEntity(this.color);
     }
 
-    /**
-     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
-     */
+    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -45,12 +42,9 @@ public abstract class NewAbstractBannerBlock extends ContainerBlock {
 
     }
 
+    @Override
     public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         return tileentity instanceof NewBannerTileEntity ? ((NewBannerTileEntity)tileentity).getItem(state) : super.getItem(worldIn, pos, state);
-    }
-
-    public DyeColor getColor() {
-        return this.color;
     }
 }

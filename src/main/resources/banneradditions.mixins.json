@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"package": "eliteasian.mods.banneradditions.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"refmap": "banneradditions.refmap.json",
+	"mixins": [
+		"LoomBlockMixin",
+		"ItemStackTileEntityRendererMixin",
+		"AbstractBannerBlockMixin",
+		"BannerItemMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"minVersion": "0.8"
+}

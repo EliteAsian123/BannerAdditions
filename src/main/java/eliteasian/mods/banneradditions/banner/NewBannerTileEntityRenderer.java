@@ -6,6 +6,7 @@ import com.mojang.datafixers.util.Pair;
 import java.util.List;
 
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
+import net.minecraft.block.BannerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallBannerBlock;
 import net.minecraft.client.renderer.Atlases;
@@ -55,9 +56,9 @@ public class NewBannerTileEntityRenderer extends TileEntityRenderer<NewBannerTil
             } else {
                 i = tileEntityIn.getWorld().getGameTime();
                 BlockState blockstate = tileEntityIn.getBlockState();
-                if (blockstate.getBlock() instanceof NewBannerBlock) {
+                if (blockstate.getBlock() instanceof BannerBlock) {
                     matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-                    float f1 = (float)(-blockstate.get(NewBannerBlock.ROTATION) * 360) / 16.0F;
+                    float f1 = (float)(-blockstate.get(BannerBlock.ROTATION) * 360) / 16.0F;
                     matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
                     this.field_228834_c_.showModel = true;
                 } else {
