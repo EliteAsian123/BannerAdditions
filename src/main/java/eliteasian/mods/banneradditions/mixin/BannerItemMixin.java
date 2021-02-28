@@ -1,5 +1,6 @@
 package eliteasian.mods.banneradditions.mixin;
 
+import eliteasian.mods.banneradditions.BannerAdditions;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import net.minecraft.block.AbstractBannerBlock;
@@ -31,18 +32,6 @@ public class BannerItemMixin extends WallOrFloorItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        CompoundNBT compoundnbt = stack.getChildTag("BlockEntityTag");
-        if (compoundnbt != null && compoundnbt.contains("Patterns")) {
-            ListNBT listnbt = compoundnbt.getList("Patterns", 10);
-
-            for(int i = 0; i < listnbt.size(); ++i) {
-                CompoundNBT compoundnbt1 = listnbt.getCompound(i);
-                DyeColor dyecolor = DyeColor.byId(compoundnbt1.getInt("Color"));
-                BannerPatternHolder bannerpattern = BannerPatterns.get(compoundnbt1.getString("Pattern"));
-                if (bannerpattern != null) {
-                    tooltip.add((new TranslationTextComponent(bannerpattern.getTranslationKey() + '.' + dyecolor.getTranslationKey())).mergeStyle(TextFormatting.GRAY));
-                }
-            }
-        }
+        BannerAdditions.addBannerInformation(stack, tooltip);
     }
 }

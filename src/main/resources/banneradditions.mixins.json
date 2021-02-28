@@ -7,7 +7,8 @@
 		"LoomBlockMixin",
 		"ItemStackTileEntityRendererMixin",
 		"AbstractBannerBlockMixin",
-		"BannerItemMixin"
+		"BannerItemMixin",
+		"ShieldItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

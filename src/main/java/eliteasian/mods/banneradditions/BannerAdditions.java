@@ -1,5 +1,6 @@
 package eliteasian.mods.banneradditions;
 
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternTextureHandler;
 import eliteasian.mods.banneradditions.banner.NewBannerTileEntityRenderer;
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
@@ -10,12 +11,18 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.resources.IReloadableResourceManager;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -40,6 +47,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 @Mod(BannerAdditions.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -129,6 +137,22 @@ public class BannerAdditions {
         } else if (event.getMap().getTextureLocation().equals(new ResourceLocation("minecraft:textures/atlas/shield_patterns.png"))) {
             for (ResourceLocation i : BannerPatternTextureHandler.shieldTextures) {
                 event.addSprite(i);
+            }
+        }
+    }
+
+    public static void addBannerInformation(ItemStack stack, List<ITextComponent> tooltip) {
+        CompoundNBT compoundnbt = stack.getChildTag("BlockEntityTag");
+        if (compoundnbt != null && compoundnbt.contains("Patterns")) {
+            ListNBT listnbt = compoundnbt.getList("Patterns", 10);
+
+            for(int i = 0; i < listnbt.size(); ++i) {
+                CompoundNBT compoundnbt1 = listnbt.getCompound(i);
+                DyeColor dyecolor = DyeColor.byId(compoundnbt1.getInt("Color"));
+                BannerPatternHolder bannerpattern = BannerPatterns.get(compoundnbt1.getString("Pattern"));
+                if (bannerpattern != null) {
+                    tooltip.add((new TranslationTextComponent(bannerpattern.getTranslationKey() + '.' + dyecolor.getTranslationKey())).mergeStyle(TextFormatting.GRAY));
+                }
             }
         }
     }
