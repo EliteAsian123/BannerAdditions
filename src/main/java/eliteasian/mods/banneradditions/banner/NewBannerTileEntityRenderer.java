@@ -6,6 +6,7 @@ import com.mojang.datafixers.util.Pair;
 import java.util.List;
 
 import eliteasian.mods.banneradditions.bannerpattern.BannerPatternHolder;
+import eliteasian.mods.banneradditions.bannerpattern.BannerPatterns;
 import net.minecraft.block.BannerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallBannerBlock;
@@ -44,44 +45,46 @@ public class NewBannerTileEntityRenderer extends TileEntityRenderer<NewBannerTil
     }
 
     public void render(NewBannerTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        List<Pair<BannerPatternHolder, DyeColor>> list = tileEntityIn.getPatternList();
-        if (list != null) {
-            boolean flag = tileEntityIn.getWorld() == null;
-            matrixStackIn.push();
-            long i;
-            if (flag) {
-                i = 0L;
-                matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-                this.field_228834_c_.showModel = true;
-            } else {
-                i = tileEntityIn.getWorld().getGameTime();
-                BlockState blockstate = tileEntityIn.getBlockState();
-                if (blockstate.getBlock() instanceof BannerBlock) {
+        if (BannerPatterns.getLength() > 0) {
+            List<Pair<BannerPatternHolder, DyeColor>> list = tileEntityIn.getPatternList();
+            if (list != null) {
+                boolean flag = tileEntityIn.getWorld() == null;
+                matrixStackIn.push();
+                long i;
+                if (flag) {
+                    i = 0L;
                     matrixStackIn.translate(0.5D, 0.5D, 0.5D);
-                    float f1 = (float)(-blockstate.get(BannerBlock.ROTATION) * 360) / 16.0F;
-                    matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
                     this.field_228834_c_.showModel = true;
                 } else {
-                    matrixStackIn.translate(0.5D, (double)-0.16666667F, 0.5D);
-                    float f3 = -blockstate.get(WallBannerBlock.HORIZONTAL_FACING).getHorizontalAngle();
-                    matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f3));
-                    matrixStackIn.translate(0.0D, -0.3125D, -0.4375D);
-                    this.field_228834_c_.showModel = false;
+                    i = tileEntityIn.getWorld().getGameTime();
+                    BlockState blockstate = tileEntityIn.getBlockState();
+                    if (blockstate.getBlock() instanceof BannerBlock) {
+                        matrixStackIn.translate(0.5D, 0.5D, 0.5D);
+                        float f1 = (float) (-blockstate.get(BannerBlock.ROTATION) * 360) / 16.0F;
+                        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
+                        this.field_228834_c_.showModel = true;
+                    } else {
+                        matrixStackIn.translate(0.5D, (double) -0.16666667F, 0.5D);
+                        float f3 = -blockstate.get(WallBannerBlock.HORIZONTAL_FACING).getHorizontalAngle();
+                        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f3));
+                        matrixStackIn.translate(0.0D, -0.3125D, -0.4375D);
+                        this.field_228834_c_.showModel = false;
+                    }
                 }
-            }
 
-            matrixStackIn.push();
-            matrixStackIn.scale(0.6666667F, -0.6666667F, -0.6666667F);
-            IVertexBuilder ivertexbuilder = ModelBakery.LOCATION_BANNER_BASE.getBuffer(bufferIn, RenderType::getEntitySolid);
-            this.field_228834_c_.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
-            this.field_228835_d_.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
-            BlockPos blockpos = tileEntityIn.getPos();
-            float f2 = ((float)Math.floorMod((long)(blockpos.getX() * 7 + blockpos.getY() * 9 + blockpos.getZ() * 13) + i, 100L) + partialTicks) / 100.0F;
-            this.field_228833_a_.rotateAngleX = (-0.0125F + 0.01F * MathHelper.cos(((float)Math.PI * 2F) * f2)) * (float)Math.PI;
-            this.field_228833_a_.rotationPointY = -32.0F;
-            func_230180_a_(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, this.field_228833_a_, ModelBakery.LOCATION_BANNER_BASE, true, list);
-            matrixStackIn.pop();
-            matrixStackIn.pop();
+                matrixStackIn.push();
+                matrixStackIn.scale(0.6666667F, -0.6666667F, -0.6666667F);
+                IVertexBuilder ivertexbuilder = ModelBakery.LOCATION_BANNER_BASE.getBuffer(bufferIn, RenderType::getEntitySolid);
+                this.field_228834_c_.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
+                this.field_228835_d_.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn);
+                BlockPos blockpos = tileEntityIn.getPos();
+                float f2 = ((float) Math.floorMod((long) (blockpos.getX() * 7 + blockpos.getY() * 9 + blockpos.getZ() * 13) + i, 100L) + partialTicks) / 100.0F;
+                this.field_228833_a_.rotateAngleX = (-0.0125F + 0.01F * MathHelper.cos(((float) Math.PI * 2F) * f2)) * (float) Math.PI;
+                this.field_228833_a_.rotationPointY = -32.0F;
+                func_230180_a_(matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, this.field_228833_a_, ModelBakery.LOCATION_BANNER_BASE, true, list);
+                matrixStackIn.pop();
+                matrixStackIn.pop();
+            }
         }
     }
 

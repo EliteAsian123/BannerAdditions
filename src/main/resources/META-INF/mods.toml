@@ -30,7 +30,7 @@ displayURL="https://github.com/EliteAsian123/BannerAdditions" #optional
 authors="EliteAsian123" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Create custom banner patterns for Minecraft (1.16.5)
+Create custom banner patterns for Minecraft (1.16.5 and 1.16.4)
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.banneradditions]] #optional
@@ -48,6 +48,6 @@ Create custom banner patterns for Minecraft (1.16.5)
 [[dependencies.banneradditions]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5]"
+    versionRange="[1.16.4,1.16.5]"
     ordering="NONE"
     side="BOTH"
