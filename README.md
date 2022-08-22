@@ -1,3 +1,7 @@
+> **Warning**
+>
+> Unfortunatly, I have stopped working on this mod. Sorry for the inconvenience.
+
 # BannerAdditions
 BannerAdditions adds more banner patterns to Minecraft (1.16.x)!
 Since Minecraft is dumb and banner patterns can't be added outside of Minecraft, I decided to redo some parts of the system. Now, you can add your own banner patterns via resource pack and datapack!
